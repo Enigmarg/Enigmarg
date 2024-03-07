@@ -8,6 +8,7 @@ class Engine():
         self.screen = pygame.display.set_mode((800, 600))
         self.clock = pygame.time.Clock()
         self.running = True
+        # Creates the tile map that fits the screen size and render it only once
         self.map = Tilemap((int(800 / 50), int(600 / 50)), 50, self.screen)
         self.map.render_map()
 
@@ -19,19 +20,15 @@ class Engine():
                     case pygame.QUIT:
                         self.running = False
                     case pygame.MOUSEBUTTONDOWN:
+                        # When the user presses the left mouse button it creates a plant
                         if pygame.mouse.get_pressed()[0]:
                             self.map.create_plant()
 
-            # self.map.render()
-            font = pygame.font.Font(pygame.font.get_default_font(), 32)
-
-            # text = font.render(str("FPS: %.2f" % (self.clock.get_fps())), True, "black")
-            # self.screen.blit(text, (0, 0))
-
+            # Prints the game FPS on the terminal
             print(str("FPS: %.1f" % (self.clock.get_fps())))
 
+            # Limits the game fps to 60
             self.clock.tick(60)
-            # self.map.update()
             pygame.display.flip()
         pygame.quit()
 
