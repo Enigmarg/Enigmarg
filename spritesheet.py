@@ -16,7 +16,7 @@ class Spritesheet(object):
 
         if color_key != None:
             if color_key == -1:
-                color_key = self.image.get_at(0, 0)
+                color_key = self.image.get_at((0, 0))
             self.image.set_colorkey(color_key, pygame.RLEACCEL)
         
         return self.image
