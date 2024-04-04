@@ -9,6 +9,8 @@ class Engine():
         self.running = True
 
     def run(self):
+        font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
+
         while self.running:
             # Cria uma pool para todos os eventos do jogo
             for event in pygame.event.get():
@@ -21,9 +23,13 @@ class Engine():
             
             self.screen.fill("purple")
 
+            fps = font.render(f"FPS: %.0f" % (self.clock.get_fps()), 1, "white", "gray")
+
+            self.screen.blit(fps, (20, 20))
+
             pygame.display.flip()
 
             # Limita o framerate para 60FPS
-            self.clock.tick(60) / 1000
+            self.clock.tick(60)
 
         pygame.quit()
