@@ -23,7 +23,7 @@ class Engine():
             
             self.screen.fill("purple")
 
-            fps = font.render(f"FPS: %.0f" % (self.clock.get_fps()), 1, "white", "gray")
+            fps = font.render(f"FpS: %.0f" % (self.clock.get_fps()), 1, "white", "gray")
 
             self.screen.blit(fps, (20, 20))
 
