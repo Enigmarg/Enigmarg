@@ -1,3 +1,5 @@
+![Pylint](https://github.com/Enigmarg/Enigmarg/actions/workflows/pylint.yml/badge.svg)
+
 # Projeto Integrador Interdisciplinar (PII) - Colégio Piaget
 
 Instituto Mauá de Tecnologia (IMT) - Turma 3
@@ -27,3 +29,4 @@ Ex:. `feat: player movement`
     - Nome de classes: Camel Case
     - Nome de constantes: Maiúscula
     - Nome de funções: Snake Case
+    - Formatador: `pylint`
