@@ -1,5 +1,5 @@
-from Levels.Level_0 import Level0
-from Levels.Level_1 import Level1
+from Levels.level_0 import Level0
+from Levels.level_1 import Level1
 
 TILE_SIZE = 30
 PLAYER_VELOCITY = 200
