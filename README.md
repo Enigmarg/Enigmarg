@@ -27,3 +27,4 @@ Ex:. `feat: player movement`
     - Nome de classes: Camel Case
     - Nome de constantes: Maiúscula
     - Nome de funções: Snake Case
+    - Formatador: `pylint`

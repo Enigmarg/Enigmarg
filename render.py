@@ -17,8 +17,6 @@ class Engine():
         self.sceneManager.changeScene("level0")
 
     def run(self):
-        font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
-
         while self.running:
             # Cria uma pool para todos os eventos do jogo
             for event in pygame.event.get():
@@ -28,11 +26,13 @@ class Engine():
 
             keys = pygame.key.get_pressed()
 
+            # Change scene on key press
             if keys[pygame.K_e]:
                 self.sceneManager.changeScene("level1")
             if keys[pygame.K_d]:
                 self.sceneManager.changeScene("level0")
 
+            # Execute scene "run" function
             self.sceneManager.getScene().run()
 
             pygame.display.flip()
@@ -51,7 +51,6 @@ class SceneManager:
         # Fetch scenelist from util file
         self.sceneList = SCENES
         print(SCENES["level1"])
-        pass
 
     def changeScene(self, nextScene):
         self.currentScene = nextScene
