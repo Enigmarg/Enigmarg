@@ -1,5 +1,5 @@
 import pygame
-from util import *
+from util import SCENES
 
 
 class Engine():
@@ -13,8 +13,8 @@ class Engine():
         self.running = True
 
         # Instantiate the scene manager
-        self.sceneManager = SceneManager(self.screen)
-        self.sceneManager.changeScene("level0")
+        self.scene_manager = SceneManager(self.screen)
+        self.scene_manager.change_scene("level0")
 
     def run(self):
         while self.running:
@@ -28,12 +28,12 @@ class Engine():
 
             # Change scene on key press
             if keys[pygame.K_e]:
-                self.sceneManager.changeScene("level1")
+                self.scene_manager.change_scene("level1")
             if keys[pygame.K_d]:
-                self.sceneManager.changeScene("level0")
+                self.scene_manager.change_scene("level0")
 
             # Execute scene "run" function
-            self.sceneManager.getScene().run()
+            self.scene_manager.get_scene().run()
 
             pygame.display.flip()
 
@@ -46,18 +46,18 @@ class Engine():
 # The scene manager class
 class SceneManager:
     def __init__(self, screen):
-        self.currentScene = None
+        self.current_scene = None
         self.screen = screen
         # Fetch scenelist from util file
-        self.sceneList = SCENES
+        self.scene_list = SCENES
         print(SCENES["level1"])
 
-    def changeScene(self, nextScene):
-        self.currentScene = nextScene
+    def change_scene(self, next_scene):
+        self.current_scene = next_scene
 
-    def getScene(self):
-        nextLevel = self.sceneList[self.currentScene]
-        return nextLevel(self.screen)
+    def get_scene(self):
+        next_level = self.scene_list[self.current_scene]
+        return next_level(self.screen)
 
-    def getAvailableScenes(self):
-        return self.sceneList
+    def get_available_scenes(self):
+        return self.scene_list
