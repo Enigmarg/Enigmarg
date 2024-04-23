@@ -1,12 +1,20 @@
 import pygame
 from util import *
 
+
 class Engine():
     def __init__(self):
+        # Initializes pygame modules
         pygame.init()
+
+        # Creates the display, the clock and sets a boolean to terminate the game
         self.screen = pygame.display.set_mode((800, 600))
         self.clock = pygame.time.Clock()
         self.running = True
+
+        # Instantiate the scene manager
+        self.sceneManager = SceneManager(self.screen)
+        self.sceneManager.changeScene("level0")
 
     def run(self):
         font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
@@ -18,14 +26,14 @@ class Engine():
                     case pygame.QUIT:
                         self.running = False
 
-            # Get a pool of all the pressed keys
             keys = pygame.key.get_pressed()
-            
-            self.screen.fill("purple")
 
-            fps = font.render(f"FPS: %.0f" % (self.clock.get_fps()), 1, "white", "gray")
+            if keys[pygame.K_e]:
+                self.sceneManager.changeScene("level1")
+            if keys[pygame.K_d]:
+                self.sceneManager.changeScene("level0")
 
-            self.screen.blit(fps, (20, 20))
+            self.sceneManager.getScene().run()
 
             pygame.display.flip()
 
@@ -33,3 +41,21 @@ class Engine():
             self.clock.tick(60)
 
         pygame.quit()
+
+
+# The scene manager class
+class SceneManager:
+    def __init__(self, screen):
+        self.currentScene = None
+        self.screen = screen
+        # Fetch scenelist from util file
+        self.sceneList = SCENES
+        print(SCENES["level1"])
+        pass
+
+    def changeScene(self, nextScene):
+        self.currentScene = nextScene
+
+    def getScene(self):
+        nextLevel = self.sceneList[self.currentScene]
+        return nextLevel(self.screen)
