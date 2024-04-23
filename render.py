@@ -59,3 +59,6 @@ class SceneManager:
     def getScene(self):
         nextLevel = self.sceneList[self.currentScene]
         return nextLevel(self.screen)
+
+    def getAvailableScenes(self):
+        return self.sceneList
