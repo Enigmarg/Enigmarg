@@ -58,7 +58,7 @@ class SceneManager:
     def initialize_scene(self):
         scene = self.scene_list[self.current_scene](
             self.screen)
-        scene.isActive = True
+        scene.is_active = True
         return scene
 
     def get_available_scenes(self):
@@ -87,7 +87,7 @@ class SceneManager:
                     self.previous_scene = current_scene
 
                     if current_scene is not None:
-                        self.previous_scene.isActive = False
+                        self.previous_scene.is_active = False
 
                     self.current_scene = next_scene
 
