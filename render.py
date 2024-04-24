@@ -1,5 +1,5 @@
 import pygame
-from util import SCENES
+from util import SCENES, WINDOW_SIZE
 
 
 class Engine():
@@ -7,7 +7,7 @@ class Engine():
         # Initializes pygame modules
         pygame.init()
 
-        self.screen = pygame.display.set_mode((800, 600))
+        self.screen = pygame.display.set_mode(WINDOW_SIZE)
         self.clock = pygame.time.Clock()
         self.running = True
 
@@ -48,42 +48,48 @@ class SceneManager:
         self.previous_scene = None
         self.current_scene = 'level0'
         self.screen = screen
-        # Fetch scenelist from util file
         self.scene_list = SCENES
         self.active_scene = self.initialize_scene()
 
+    # Changes the scene and unloads the previous
     def change_scene(self, current_scene, next_scene):
         self.transition(current_scene, next_scene)
 
+    # Loads the next scene and returns it
     def initialize_scene(self):
         scene = self.scene_list[self.current_scene](
             self.screen)
         scene.is_active = True
         return scene
 
+    # Getter for all the lists
     def get_available_scenes(self):
         return self.scene_list
 
+    # Getter for active scene
     def get_active_scene(self):
         return self.active_scene
 
+    # Transition animation for scene
     def transition(self, current_scene, next_scene):
-        r = 600
+        # Initialize variables for transition
+        # Creates overlay surface with colorkey
+        radius = 600
         on_transition = True
         growing = False
-        s = pygame.Surface((800, 600), pygame.SRCALPHA)
-        rect = pygame.Rect(0, 0, 800, 600)
-        s.set_colorkey(pygame.Color("green"))
+        overlay = pygame.Surface(WINDOW_SIZE, pygame.SRCALPHA)
+        overlay.set_colorkey(pygame.Color("green"))
 
         while on_transition:
             self.active_scene.run()
-            s.fill("black")
-            pygame.draw.circle(s, pygame.Color(0, 255, 0), rect.center, r)
-            self.screen.blit(s, (0, 0))
+            overlay.fill("black")
+            pygame.draw.circle(overlay, pygame.Color(
+                0, 255, 0), (WINDOW_SIZE[0] / 2, WINDOW_SIZE[1] / 2), radius)
+            self.screen.blit(overlay, (0, 0))
 
             if not growing:
-                r -= 1
-                if r == -10:
+                radius -= 1
+                if radius == -10:
                     self.previous_scene = current_scene
 
                     if current_scene is not None:
@@ -96,8 +102,8 @@ class SceneManager:
                     self.active_scene = active
                     growing = True
             else:
-                r += 1
-                if r >= 600:
+                radius += 1
+                if radius >= 600:
                     on_transition = False
                     break
 
