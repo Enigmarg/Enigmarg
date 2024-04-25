@@ -1,5 +1,5 @@
 import pygame
-from util import SCENES, WINDOW_SIZE
+from util import SCENES, WINDOW_SIZE, ease_in_out_cubic
 
 
 class Engine():
@@ -76,20 +76,27 @@ class SceneManager:
         # Creates overlay surface with colorkey
         radius = 600
         on_transition = True
+        transition_delay = 250
         growing = False
         overlay = pygame.Surface(WINDOW_SIZE, pygame.SRCALPHA)
         overlay.set_colorkey(pygame.Color("green"))
 
         while on_transition:
-            self.active_scene.run()
-            overlay.fill("black")
-            pygame.draw.circle(overlay, pygame.Color(
-                0, 255, 0), (WINDOW_SIZE[0] / 2, WINDOW_SIZE[1] / 2), radius)
-            self.screen.blit(overlay, (0, 0))
+            for i in range(1, transition_delay):
+                # Return value from formula
+                r = ease_in_out_cubic(i/transition_delay) * radius
+                if not growing:
+                    # Invert formula
+                    r = (-1 * r) + 600
+                overlay.fill("black")
+                self.active_scene.run()
+                pygame.draw.circle(overlay, pygame.Color(
+                    0, 255, 0), (WINDOW_SIZE[0] / 2, WINDOW_SIZE[1] / 2), r)
+                self.screen.blit(overlay, (0, 0))
 
-            if not growing:
-                radius -= 1
-                if radius == -10:
+                pygame.display.flip()
+
+                if i == transition_delay - 1 and not growing:
                     self.previous_scene = current_scene
 
                     if current_scene is not None:
@@ -101,10 +108,5 @@ class SceneManager:
 
                     self.active_scene = active
                     growing = True
-            else:
-                radius += 1
-                if radius >= 600:
+                elif i == transition_delay - 1 and growing:
                     on_transition = False
-                    break
-
-            pygame.display.flip()
