@@ -76,7 +76,7 @@ class SceneManager:
         # Creates overlay surface with colorkey
         radius = 600
         on_transition = True
-        transition_delay = 250
+        transition_delay = 150
         growing = False
         overlay = pygame.Surface(WINDOW_SIZE, pygame.SRCALPHA)
         overlay.set_colorkey(pygame.Color("green"))
