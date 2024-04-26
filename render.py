@@ -1,5 +1,6 @@
 import pygame
 from util import SCENES, WINDOW_SIZE, ease_in_out_cubic
+from Levels.level import Level
 
 
 class Engine():
@@ -13,6 +14,7 @@ class Engine():
 
         # Instantiate the scene manager
         self.scene_manager = SceneManager(self.screen)
+        self.scene_manager.transition(None, "level0", "out")
 
     def run(self):
         while self.running:
@@ -25,11 +27,13 @@ class Engine():
                         self.running = False
                     case pygame.KEYDOWN:
                         if event.key == pygame.K_d:
-                            self.scene_manager.change_scene(
+                            self.scene_manager.transition(
                                 active_scene, "level0")
                         if event.key == pygame.K_e:
-                            self.scene_manager.change_scene(
+                            self.scene_manager.transition(
                                 active_scene, "level1")
+                        if event.key == pygame.K_q:
+                            self.running = False
 
             # Execute scene "run" function
             active_scene.run()
@@ -45,21 +49,18 @@ class Engine():
 # The scene manager class
 class SceneManager:
     def __init__(self, screen):
-        self.previous_scene = None
-        self.current_scene = 'level0'
-        self.screen = screen
-        self.scene_list = SCENES
-        self.active_scene = self.initialize_scene()
-
-    # Changes the scene and unloads the previous
-    def change_scene(self, current_scene, next_scene):
-        self.transition(current_scene, next_scene)
+        self.previous_scene: str | None = None
+        self.current_scene: str = 'level0'
+        self.screen: pygame.Surface = screen
+        self.scene_list: dict = SCENES
+        self.active_scene: Level = self.initialize_scene()
 
     # Loads the next scene and returns it
     def initialize_scene(self):
-        scene = self.scene_list[self.current_scene](
+        scene: Level = self.scene_list[self.current_scene](
             self.screen)
         scene.is_active = True
+        scene.load()
         return scene
 
     # Getter for all the lists
@@ -71,10 +72,10 @@ class SceneManager:
         return self.active_scene
 
     # Transition animation for scene
-    def transition(self, current_scene, next_scene):
+    def transition(self, current_scene, next_scene, mode="both"):
         # Initialize variables for transition
         # Creates overlay surface with colorkey
-        radius = 600
+        radius = WINDOW_SIZE[1]
         on_transition = True
         transition_delay = 150
         growing = False
@@ -85,28 +86,40 @@ class SceneManager:
             for i in range(1, transition_delay):
                 # Return value from formula
                 r = ease_in_out_cubic(i/transition_delay) * radius
-                if not growing:
-                    # Invert formula
+
+                if mode == "in":
                     r = (-1 * r) + 600
+                elif mode == "out":
+                    r = r
+                elif mode == "both":
+                    if not growing:
+                        r = (-1 * r) + 600
+
                 overlay.fill("black")
                 self.active_scene.run()
-                pygame.draw.circle(overlay, pygame.Color(
-                    0, 255, 0), (WINDOW_SIZE[0] / 2, WINDOW_SIZE[1] / 2), r)
+
+                pygame.draw.circle(overlay, pygame.Color("green"), (WINDOW_SIZE[0] / 2, WINDOW_SIZE[1] / 2), r)
                 self.screen.blit(overlay, (0, 0))
 
                 pygame.display.flip()
 
-                if i == transition_delay - 1 and not growing:
-                    self.previous_scene = current_scene
+                if i == transition_delay - 1:
+                    if mode is not "both":
+                        on_transition = False
+                        break
+                    if not growing:
+                        self.previous_scene = current_scene
 
-                    if current_scene is not None:
-                        self.previous_scene.is_active = False
+                        if current_scene is not None:
+                            self.previous_scene.is_active = False
 
-                    self.current_scene = next_scene
+                        self.current_scene = next_scene
 
-                    active = self.initialize_scene()
+                        active = self.initialize_scene() 
 
-                    self.active_scene = active
-                    growing = True
-                elif i == transition_delay - 1 and growing:
-                    on_transition = False
+                        self.active_scene = active
+                        if self.active_scene.is_loaded:
+                            growing = True
+                        break
+                    elif growing:
+                        on_transition = False
