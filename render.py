@@ -2,7 +2,7 @@ import pygame
 from util import SCENES, WINDOW_SIZE, ease_in_out_cubic
 from Levels.level import Level
 
-# Main engine
+
 class Engine():
     def __init__(self):
         # Initializes pygame modules
