@@ -104,6 +104,9 @@ class SceneManager:
                 pygame.display.flip()
 
                 if i == transition_delay - 1:
+                    if mode is not "both":
+                        on_transition = False
+                        break
                     if not growing:
                         self.previous_scene = current_scene
 
@@ -112,10 +115,11 @@ class SceneManager:
 
                         self.current_scene = next_scene
 
-                        active = self.initialize_scene()
+                        active = self.initialize_scene() 
 
                         self.active_scene = active
-                        growing = True
+                        if self.active_scene.is_loaded:
+                            growing = True
                         break
                     elif growing:
                         on_transition = False
