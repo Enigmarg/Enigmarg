@@ -1,4 +1,3 @@
-import pygame
 
 
 class Level:
@@ -14,7 +13,8 @@ class Level:
             is_active (bool): Indicates whether the level is currently active.
             is_loaded (bool): Indicates whether the level has been loaded.
         """
-        self.scene_manager = scene_manager
+        from Classes.scene_manager import SceneManager
+        self.scene_manager: SceneManager = scene_manager
         self.is_active: bool = False
         self.is_loaded: bool = False
         self.screen = scene_manager.screen
@@ -23,13 +23,11 @@ class Level:
         """
         Loads the level data from a file.
         """
-        pass
 
     def run(self):
         """
         This method is responsible for executing the logic of the level.
         """
-        pass
 
     def get_status(self):
         """

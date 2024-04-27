@@ -3,6 +3,11 @@ from Levels.level import Level
 
 
 class Level0(Level):
+    def __init__(self, scene_manager):
+        super().__init__(scene_manager)
+        self.pos = 0
+        self.images = {}
+
     def load(self):
         self.pos = 0
 
