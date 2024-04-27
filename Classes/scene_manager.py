@@ -53,28 +53,36 @@ class SceneManager:
         overlay.set_colorkey(pygame.Color("green"))
 
         while on_transition:
-            for i in range(1, transition_delay):
-                # Return value from formula
+            for i in range(0, transition_delay):
+                # Return animation keyframe
                 r = ease_in_out_cubic(i/transition_delay) * radius
 
+                # Check mode and set radius accordingly
                 if mode == "in":
                     r = (-1 * r) + 600
                 elif mode == "out":
-                    r = r
+                    pass
                 elif mode == "both":
                     if not growing:
                         r = (-1 * r) + 600
 
+                # Fill overlay with black
                 overlay.fill("black")
                 self.active_scene.run()
 
-                pygame.draw.circle(overlay, pygame.Color("green"), (WINDOW_SIZE[0] / 2, WINDOW_SIZE[1] / 2), r)
+                # Draw circle on overlay
+                pygame.draw.circle(overlay, pygame.Color("green"),
+                                   (WINDOW_SIZE[0] / 2, WINDOW_SIZE[1] / 2), r)
+
+                # Blit overlay to screen
                 self.screen.blit(overlay, (0, 0))
 
-                pygame.display.flip()
+                # Update display
+                pygame.display.update()
 
+                # Check if transition is over
                 if i == transition_delay - 1:
-                    if mode is not "both":
+                    if mode != "both":
                         on_transition = False
                         break
                     if not growing:
@@ -85,11 +93,11 @@ class SceneManager:
 
                         self.current_scene = next_scene
 
-                        active = self.initialize_scene() 
+                        active = self.initialize_scene()
 
                         self.active_scene = active
                         if self.active_scene.is_loaded:
                             growing = True
                         break
-                    elif growing:
+                    if growing:
                         on_transition = False

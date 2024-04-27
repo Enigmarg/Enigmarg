@@ -38,7 +38,7 @@ class Engine():
             # Execute scene "run" function
             active_scene.run()
 
-            pygame.display.flip()
+            pygame.display.update()
 
             # Limita o framerate para 60FPS
             self.clock.tick(60)

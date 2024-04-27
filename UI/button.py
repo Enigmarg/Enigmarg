@@ -2,9 +2,8 @@ import pygame
 
 #Classe contendo características gerais de todos os botões de dentro do jogo.
 class Button:
-
-    def __init__(self, x, y, width, height, color, text):
-        self.rect = pygame.Rect(x, y, width, height)
+    def __init__(self, pos:tuple[float, float], size:tuple[float, float], color, text):
+        self.rect = pygame.Rect(pos[0], pos[1], size[0], size[1])
         self.color = color
         self.text = text
         self.font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
@@ -20,8 +19,8 @@ class Button:
 #Pegando a posição do mouse para ativar a funcionalidade dos funções.
     def mouse_pos(self) -> tuple[int,int]:
         pos = pygame.mouse.get_pos()
-        return pos 
-    
+        return pos
+
     def check_button(self):
         if self.rect.collidepoint(self.mouse_pos()):
             self.color = pygame.Color("black")
