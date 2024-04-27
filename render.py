@@ -58,7 +58,7 @@ class SceneManager:
     # Loads the next scene and returns it
     def initialize_scene(self):
         scene: Level = self.scene_list[self.current_scene](
-            self.screen)
+            self)
         scene.is_active = True
         scene.load()
         return scene
