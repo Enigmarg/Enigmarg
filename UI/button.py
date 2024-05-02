@@ -14,7 +14,6 @@ class Button:
         text_surface = self.font.render(self.text, True, pygame.Color("white"))
         text_rect = text_surface.get_rect(center=self.rect.center)
         surface.blit(text_surface, text_rect)
-        print(self.color)
 
 #Pegando a posição do mouse para ativar a funcionalidade dos funções.
     def mouse_pos(self) -> tuple[int,int]:
@@ -24,5 +23,7 @@ class Button:
     def check_button(self):
         if self.rect.collidepoint(self.mouse_pos()):
             self.color = pygame.Color("black")
-            print(self.color)
-            print("collide")
+            if pygame.mouse.get_pressed()[0]:
+                return True
+
+        return False
