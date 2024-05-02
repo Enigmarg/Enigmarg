@@ -15,7 +15,7 @@ class Engine():
         self.running = True
         self.transition = 0
         self.active_scene: Level | None = None
-        self.next_scene: Level  = Level0(self.screen)
+        self.next_scene: Level  = Level0(self.screen, self.call_transition, self.quit)
         self.loaded = False
 
     def run(self):
@@ -38,9 +38,9 @@ class Engine():
                         self.running = False
                     case pygame.KEYDOWN:
                         if event.key == pygame.K_d:
-                            self.call_transition(Level1(self.screen))
+                            self.call_transition(Level1(self.screen, self.call_transition))
                         if event.key == pygame.K_e:
-                            self.call_transition(Level0(self.screen))
+                            self.call_transition(Level0(self.screen, self.call_transition))
                         if event.key == pygame.K_q:
                             self.running = False
 
@@ -71,3 +71,6 @@ class Engine():
     def call_transition(self, scene: Level):
         self.next_scene = scene
         self.loaded = False
+
+    def quit(self):
+        self.running = False
