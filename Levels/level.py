@@ -1,5 +1,5 @@
 class Level:
-    def __init__(self, scene_manager):
+    def __init__(self, screen):
         """
         Initializes a Level object.
 
@@ -11,10 +11,9 @@ class Level:
             is_active (bool): Indicates whether the level is currently active.
             is_loaded (bool): Indicates whether the level has been loaded.
         """
-        self.scene_manager = scene_manager
         self.is_active: bool = False
         self.is_loaded: bool = False
-        self.screen = scene_manager.screen
+        self.screen = screen
 
     def load(self):
         """

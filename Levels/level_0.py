@@ -3,8 +3,9 @@ from Levels.level import Level
 
 
 class Level0(Level):
-    def __init__(self, scene_manager):
-        super().__init__(scene_manager)
+    def __init__(self, screen):
+        super().__init__(screen)
+        self.screen = screen
         self.pos = 0
         self.images = {}
 
@@ -26,6 +27,3 @@ class Level0(Level):
 
         if self.pos >= self.screen.get_width():
             self.pos = 0
-
-    def get_status(self):
-        return self.is_active

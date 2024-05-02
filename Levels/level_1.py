@@ -6,7 +6,7 @@ class Level1(Level):
         self.is_loaded = True
 
     def run(self):
-        self.screen.fill("red")
+        self.screen.fill("blue")
 
     def get_status(self):
         return self.is_active
