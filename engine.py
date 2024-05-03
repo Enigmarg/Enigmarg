@@ -15,7 +15,7 @@ class Engine():
         self.running = True
         self.transition = 0
         self.active_scene: Level | None = None
-        self.next_scene: Level  = Level0(self.screen)
+        self.next_scene: Level  = Level0(self.screen, self.call_transition, self.quit)
         self.loaded = False
 
     def run(self):
@@ -31,16 +31,17 @@ class Engine():
             if self.transition < 0:
                 self.transition += 1
 
-            # Cria uma pool para todos os eventos do jogo
+            # Creates an event loop
             for event in pygame.event.get():
                 match event.type:
                     case pygame.QUIT:
                         self.running = False
                     case pygame.KEYDOWN:
                         if event.key == pygame.K_d:
-                            self.call_transition(Level1(self.screen))
+                            self.call_transition(Level1(self.screen, self.call_transition))
                         if event.key == pygame.K_e:
-                            self.call_transition(Level0(self.screen))
+                            self.call_transition(
+                                Level0(self.screen, self.call_transition, self.quit))
                         if event.key == pygame.K_q:
                             self.running = False
 
@@ -55,9 +56,9 @@ class Engine():
                                     (60 - abs(self.transition)) * 10)
                 self.screen.blit(transition_surf, (0, 0))
 
-            pygame.display.update()
+            pygame.display.update() # type: ignore
 
-            # Limita o framerate para 60FPS
+            # Limits the frame rate to 60 FPS
             self.clock.tick(60)
 
         pygame.quit()
@@ -71,3 +72,6 @@ class Engine():
     def call_transition(self, scene: Level):
         self.next_scene = scene
         self.loaded = False
+
+    def quit(self):
+        self.running = False
