@@ -9,6 +9,8 @@ class Spritesheet:
         # Sets the size of each individual sprite in the sheet
         self.size_x = size_x
         self.size_y = size_y
+        self.rect = None
+        self.image = None
         # Tries to load the spritesheet image and convert it to have alpha channels
         try:
             self.sheet = pygame.image.load(imagepath).convert_alpha()
@@ -25,5 +27,5 @@ class Spritesheet:
             if color_key == -1:
                 color_key = self.image.get_at((0, 0))
             self.image.set_colorkey(color_key, pygame.RLEACCEL)
-        
+
         return self.image
