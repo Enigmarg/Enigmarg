@@ -16,7 +16,6 @@ class Level:
         self.screen = screen
         self.transition_call = transition_call
 
-
     def load(self):
         """
         Loads the level data from a file.

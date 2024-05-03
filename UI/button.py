@@ -17,7 +17,7 @@ class Button:
         text_surface = self.font.render(self.text, True, pygame.Color("white"))
         text_rect = text_surface.get_rect(center=self.rect.center)
         surface.blit(text_surface, text_rect)
-      
+
 #Pegando a posição do mouse para ativar a funcionalidade dos funções.
     def mouse_pos(self) -> tuple[int,int]:
         pos = pygame.mouse.get_pos()
@@ -34,4 +34,3 @@ class Button:
             self.color = pygame.Color("gray")
             pygame.mouse.set_cursor(*pygame.cursors.arrow)
         return False
-                

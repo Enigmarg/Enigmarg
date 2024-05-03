@@ -12,6 +12,7 @@ class Level0(Level):
         self.screen = screen
         self.pos = 0
         self.images = {}
+        self.button = Button((400, 300), (200, 100), pygame.Color("red"), "Level 1")
 
     def load(self):
         self.pos = 0
@@ -35,6 +36,7 @@ class Level0(Level):
         self.screen.blit(self.images["background"], (self.pos, 0))
         self.screen.blit(self.images["background"], (self.pos - self.screen.get_width(), 0))
         self.screen.blit(self.logo, ((self.screen.get_width() / 2 - self.logo.get_width() // 2), 70))
+
         self.pos += 1
 
         self.jogar.draw(self.screen)
