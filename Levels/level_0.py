@@ -1,12 +1,14 @@
 import pygame
 from Levels.level import Level
-from Levels.level_1 import Level1
 from UI.button import Button
+from Levels.level_1 import Level1
 
 
+# TELA DE MENU
 class Level0(Level):
-    def __init__(self, screen, transition_caller):
-        super().__init__(screen, transition_caller)
+    def __init__(self, screen, transition_call, quit):
+        super().__init__(screen, transition_call)
+        self.quit = quit
         self.screen = screen
         self.pos = 0
         self.images = {}
@@ -17,21 +19,38 @@ class Level0(Level):
 
         self.images = {
             "background": pygame.image.load("./resources/background.png").convert(),
+            "logo": pygame.image.load("./resources/logo.png").convert_alpha()
         }
+
+        self.logo = pygame.transform.scale_by(self.images["logo"], 0.6)
 
         # Check if all images have been loaded successfully
         self.is_loaded = all(image is not None for image in self.images.values())
 
+        self.sair = Button((225, 450), (150, 50), pygame.Color("gray"), "Sair")
+        self.ranking = Button((425, 450), (150, 50), pygame.Color("gray"), "Ranking")
+        self.jogar = Button((300, 300), (200, 100), pygame.Color("gray"), "Jogar")
+
     def run(self):
         self.screen.fill("black")
-        self.screen.blit(self.images["background"], (self.pos,0))
-        self.screen.blit(self.images["background"], (self.pos - self.screen.get_width(),0))
-
-        self.button.draw(self.screen)
-        if self.button.check_button():
-            self.transition_call(Level1(self.screen, self.transition_call))
+        self.screen.blit(self.images["background"], (self.pos, 0))
+        self.screen.blit(self.images["background"], (self.pos - self.screen.get_width(), 0))
+        self.screen.blit(self.logo, ((self.screen.get_width() / 2 - self.logo.get_width() // 2), 70))
 
         self.pos += 1
 
+        self.jogar.draw(self.screen)
+        if self.jogar.check_button():
+            self.transition_call(Level1(self.screen, self.transition_call))
+
+        self.ranking.draw(self.screen)
+        self.ranking.check_button()
+
+        self.sair.draw(self.screen)
+        if self.sair.check_button():
+            self.quit()
+
         if self.pos >= self.screen.get_width():
             self.pos = 0
+    
+

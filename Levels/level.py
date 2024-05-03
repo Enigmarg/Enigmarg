@@ -1,5 +1,5 @@
 class Level:
-    def __init__(self, screen, transition_caller):
+    def __init__(self, screen, transition_call): 
         """
         Initializes a Level object.
 
@@ -14,7 +14,7 @@ class Level:
         self.is_active: bool = False
         self.is_loaded: bool = False
         self.screen = screen
-        self.transition_call = transition_caller
+        self.transition_call = transition_call
 
     def load(self):
         """

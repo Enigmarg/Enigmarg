@@ -15,7 +15,7 @@ class Engine():
         self.running = True
         self.transition = 0
         self.active_scene: Level | None = None
-        self.next_scene: Level  = Level0(self.screen, self.call_transition)
+        self.next_scene: Level  = Level0(self.screen, self.call_transition, self.quit)
         self.loaded = False
 
     def run(self):
@@ -71,3 +71,6 @@ class Engine():
     def call_transition(self, scene: Level):
         self.next_scene = scene
         self.loaded = False
+
+    def quit(self):
+        self.running = False
