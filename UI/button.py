@@ -20,7 +20,7 @@ class Button:
         pos = pygame.mouse.get_pos()
         return pos
 
-    def check_button(self):
+    def check_button(self) -> bool:
         if self.rect.collidepoint(self.mouse_pos()):
             self.color = pygame.Color("black")
             if pygame.mouse.get_pressed()[0]:
