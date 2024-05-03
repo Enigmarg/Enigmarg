@@ -1,5 +1,5 @@
 class Level:
-    def __init__(self, screen, transition_call): 
+    def __init__(self, screen, transition_call):
         """
         Initializes a Level object.
 

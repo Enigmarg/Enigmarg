@@ -1,18 +1,20 @@
 import pygame
 from Levels.level import Level
-from UI.button import Button
 from Levels.level_1 import Level1
-
+from UI.button import Button
 
 # TELA DE MENU
 class Level0(Level):
-    def __init__(self, screen, transition_call, quit):
+    def __init__(self, screen, transition_call, quit_game):
         super().__init__(screen, transition_call)
-        self.quit = quit
+        self.quit = quit_game
         self.screen = screen
         self.pos = 0
         self.images = {}
-        self.button = Button((400, 300), (200, 100), pygame.Color("red"), "Level 1")
+        self.sair = Button((225, 450), (150, 50), pygame.Color("gray"), "Sair")
+        self.ranking = Button((425, 450), (150, 50), pygame.Color("gray"), "Ranking")
+        self.jogar = Button((300, 300), (200, 100), pygame.Color("gray"), "Jogar")
+        self.logo: pygame.Surface
 
     def load(self):
         self.pos = 0
@@ -27,15 +29,12 @@ class Level0(Level):
         # Check if all images have been loaded successfully
         self.is_loaded = all(image is not None for image in self.images.values())
 
-        self.sair = Button((225, 450), (150, 50), pygame.Color("gray"), "Sair")
-        self.ranking = Button((425, 450), (150, 50), pygame.Color("gray"), "Ranking")
-        self.jogar = Button((300, 300), (200, 100), pygame.Color("gray"), "Jogar")
-
     def run(self):
         self.screen.fill("black")
         self.screen.blit(self.images["background"], (self.pos, 0))
         self.screen.blit(self.images["background"], (self.pos - self.screen.get_width(), 0))
-        self.screen.blit(self.logo, ((self.screen.get_width() / 2 - self.logo.get_width() // 2), 70))
+        self.screen.blit(self.logo, ((self.screen.get_width() / 2 - self.logo.get_width()
+                                    // 2), 70))
 
         self.pos += 1
 
@@ -52,5 +51,3 @@ class Level0(Level):
 
         if self.pos >= self.screen.get_width():
             self.pos = 0
-    
-

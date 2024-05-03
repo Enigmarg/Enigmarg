@@ -6,12 +6,13 @@ class Button:
         self.rect = pygame.Rect(pos[0], pos[1], size[0], size[1])
         self.color = color
         self.text = text
+        self.border_color = pygame.Color("white")
         self.font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
 
 #Definindo a interface dos botões.
     def draw(self, surface):
-        border_color = pygame.Color("black") 
-        border_width = 4  
+        border_color = pygame.Color("black")
+        border_width = 4
         pygame.draw.rect(surface, self.color, self.rect, border_radius=10)
         pygame.draw.rect(surface, border_color, self.rect, border_width, border_radius=10)
         text_surface = self.font.render(self.text, True, pygame.Color("white"))
@@ -26,8 +27,7 @@ class Button:
     def check_button(self) -> bool:
         if self.rect.collidepoint(self.mouse_pos()):
             self.color = pygame.Color("black")
-            self.border_color = pygame.Color("white")
-        
+
             if pygame.mouse.get_pressed()[0]:
                 return True
         else:
