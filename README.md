@@ -1,5 +1,7 @@
 ![Pylint](https://github.com/Enigmarg/Enigmarg/actions/workflows/pylint.yml/badge.svg)
 
+<img src="./resources/logo.png" width="250px"/>
+
 # Projeto Integrador Interdisciplinar (PII) - Colégio Piaget
 
 Instituto Mauá de Tecnologia (IMT) - Turma 3
