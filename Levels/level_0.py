@@ -1,6 +1,7 @@
 import pygame
 from Levels.level import Level
 from Levels.level_1 import Level1
+from Levels.level_2 import Level2
 from UI.button import Button
 
 # TELA DE MENU
@@ -43,7 +44,8 @@ class Level0(Level):
             self.transition_call(Level1(self.screen, self.transition_call))
 
         self.ranking.draw(self.screen)
-        self.ranking.check_button()
+        if self.ranking.check_button():
+            self.transition_call(Level2(self.screen, self.transition_call, self.quit, Level0))
 
         self.sair.draw(self.screen)
         if self.sair.check_button():
