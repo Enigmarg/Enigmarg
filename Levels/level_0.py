@@ -42,7 +42,7 @@ class Level0(Level):
         self.jogar.draw(self.screen)
         if self.jogar.check_button():
             self.transition_call(Level1(self.screen, self.transition_call))
-  
+
         self.ranking.draw(self.screen)
         if self.ranking.check_button():
             self.transition_call(Level2(self.screen, self.transition_call, self.quit, Level0))
