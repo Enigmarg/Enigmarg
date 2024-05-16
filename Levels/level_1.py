@@ -9,6 +9,8 @@ class Level1(Level):
         self.player = Player()
         self.x = 0
         self.cloudx = 0
+        self.images = {}
+        self.score = None
 
     def load(self):
         self.images = {
@@ -47,7 +49,7 @@ class Level1(Level):
             self.x = 0
         if abs(self.cloudx) > 800:
             self.cloudx = 0
-            
+
         self.player.move(dt)
         self.player.draw(self.screen)
 
