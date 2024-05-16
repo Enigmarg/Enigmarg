@@ -22,8 +22,10 @@ class Level1(Level):
         self.screen.fill("black")
         self.screen.blit(self.images["cloud"], (0 + self.cloudx,0))
         self.screen.blit(self.images["cloud"], (self.cloudx + 800,0))
+        self.screen.blit(self.images["cloud"], (self.cloudx - 800,0))
         self.screen.blit(self.images["background"], (0 + self.x, 100))
         self.screen.blit(self.images["background"], (self.x + 800, 100))
+        self.screen.blit(self.images["background"], (self.x - 800, 100))
 
         keys = pygame.key.get_pressed()
         self.player.acceleration = pygame.Vector2(0, 0)
