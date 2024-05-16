@@ -1,4 +1,5 @@
 import pygame
+from Levels.level_3 import Level3
 from util import WINDOW_SIZE
 from Levels.level_0 import Level0
 from Levels.level_1 import Level1
@@ -44,7 +45,7 @@ class Engine():
                         self.running = False
                     case pygame.KEYDOWN:
                         if event.key == pygame.K_d:
-                            self.call_transition(Level1(self.screen, self.call_transition))
+                            self.call_transition(Level3(self.screen, self.call_transition))
                         if event.key == pygame.K_e:
                             self.call_transition(
                                 Level0(self.screen, self.call_transition, self.quit))

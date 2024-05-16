@@ -1,6 +1,7 @@
 import pygame
 from Levels.level import Level
 from Classes.player import Player
+from Levels.level_3 import Level3
 from UI.score import Score
 
 class Level1(Level):
@@ -46,6 +47,7 @@ class Level1(Level):
             self.cloudx -= self.player.acceleration.x / 3
 
         if abs(self.x) > 800:
+            self.transition_call(Level3(self.screen, self.transition_call))
             self.x = 0
         if abs(self.cloudx) > 800:
             self.cloudx = 0
