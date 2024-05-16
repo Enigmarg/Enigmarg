@@ -15,6 +15,7 @@ class Engine():
         self.running = True
         self.transition = 0
         self.active_scene: Level | None = None
+        self.previous_scene: Level | None = None
         self.next_scene: Level  = Level0(self.screen, self.call_transition, self.quit)
         self.loaded = False
 
@@ -64,6 +65,7 @@ class Engine():
         pygame.quit()
 
     def load_scene(self, scene: Level):
+        self.previous_scene = self.active_scene
         scene.load()
 
         if scene.is_loaded:
@@ -72,6 +74,10 @@ class Engine():
     def call_transition(self, scene: Level):
         self.next_scene = scene
         self.loaded = False
+
+    def go_back(self):
+        if self.previous_scene:
+            self.call_transition(self.previous_scene)
 
     def quit(self):
         self.running = False
