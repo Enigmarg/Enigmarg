@@ -1,6 +1,7 @@
 import pygame
 from Levels.level import Level
 from Classes.player import Player
+from UI.score import Score
 
 class Level1(Level):
     def __init__(self, screen, transition_caller):
@@ -47,6 +48,9 @@ class Level1(Level):
             
         self.player.move(dt)
         self.player.draw(self.screen)
+
+        self.score = Score((10, 10), (100, 50), pygame.Color("gray"))
+        self.score.draw(self.screen)
 
     def get_status(self):
         return self.is_active
