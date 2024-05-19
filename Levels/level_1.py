@@ -7,7 +7,7 @@ from UI.score import Score
 class Level1(Level):
     def __init__(self, screen, transition_caller):
         super().__init__(screen, transition_caller)
-        self.player = Player(pygame.Vector2(0, 300))
+        self.player = Player(pygame.Vector2(300, 400))
         self.x = 0
         self.cloudx = 0
         self.images = {}
@@ -49,7 +49,7 @@ class Level1(Level):
             self.cloudx -= self.player.acceleration.x / 3
 
         if abs(self.x) > 800:
-            self.transition_call(Level3(self.screen, self.transition_call))
+            self.transition_call(Level3(self.screen, self.transition_call, self.quit, self.previous))
             self.x = 0
         if abs(self.cloudx) > 800:
             self.cloudx = 0
