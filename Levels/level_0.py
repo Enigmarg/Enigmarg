@@ -58,9 +58,10 @@ class Level0(Level):
                 self.quit()
 
             self.speaker.draw(self.screen)
-            if self.speaker.check_hover():
-                if pygame.mouse.get_pressed()[0]:
-                    pygame.mixer.fadeout(600)
+            if self.speaker.check_click():
+                pygame.mixer.pause()
+            else:
+                pygame.mixer.unpause()
 
             if self.pos >= self.screen.get_width():
                 self.pos = 0
