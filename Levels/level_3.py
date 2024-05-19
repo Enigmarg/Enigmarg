@@ -1,4 +1,6 @@
+import json
 import pygame
+from Classes.question_pool import QuestionPool
 from Levels.level import Level
 from UI.button import Button
 from UI.typography import Typography
@@ -21,6 +23,11 @@ class Level3(Level):
         self.d = Button((413, 465), (205, 90), pygame.Color("yellow"), "Apresentação do parágrafo D2")
         self.voltar = Button((10, 465), (150, 50), pygame.Color("gray"), "Voltar")
         self.score = None
+        with open("./resources/questions.json", "r", -1, "UTF-8") as file:
+            data = json.load(file)
+            self.pool = QuestionPool(data)
+        print(self.pool.get_question())
+        self.text = self.pool.get_question()
 
     def load(self):
         self.is_loaded = True
@@ -29,25 +36,11 @@ class Level3(Level):
             "chalkboard": pygame.transform.scale_by(pygame.image.load("./resources/chalkboard.png").convert_alpha(), 1.5)
         }
 
-        self.texts = []
-        chars = []
-        total_w = 0
-        indice = 0
-        h = 20
-        chars = self.text.split(" ")
-        for i in chars:
-            t = pygame.font.Font("./resources/fonts/monogram.ttf", 32).render(i, True, "black")
-            indice = chars.index(i)
-            if total_w + t.get_width() > 330:
-                h += 20
-                total_w = 0
-                self.texts.append(Typography((self.screen.get_width() / 2 - 150 * 1.5 + 30, h), ' '.join(chars[:indice]), "white"))
-                chars = chars[indice:]
+        self.render_question()
 
-            total_w += t.get_width()
+       
 
-        for i in self.texts:
-            print(i.text)
+        
 
         self.is_loaded = all(image is not None for image in self.images.values())
 
@@ -55,6 +48,13 @@ class Level3(Level):
         self.screen.fill("black")
         self.screen.blit(self.images["background"], (self.pos, 0))
         self.screen.blit(self.images["background"], (self.pos - self.screen.get_width(), 0))
+
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_UP]:
+            self.pool.next_question()
+            self.text = self.pool.get_question()
+            self.render_question()
 
         self.pos += 1
 
@@ -82,3 +82,25 @@ class Level3(Level):
 
         self.voltar.draw(self.screen)
         self.voltar.check_button()
+
+    def render_question(self):
+        self.texts = []
+        chars = []
+        total_w = 0
+        indice = 0
+        h = 20
+        chars = self.text.split(" ")
+        for i in chars:
+            t = pygame.font.Font("./resources/fonts/monogram.ttf", 32).render(i, True, "black")
+            indice = chars.index(i)
+            print(indice, i, t.get_width())
+            if total_w + t.get_width() > 300:
+                h += 20
+                total_w = 0
+                self.texts.append(Typography((self.screen.get_width() / 2 - 150 * 1.5 + 30, h), ' '.join(chars[:indice + 1]), "white"))
+                chars = chars[indice:]
+            elif total_w < 300 and indice == len(chars) - 1:
+                h += 20
+                self.texts.append(Typography((self.screen.get_width() / 2 - 150 * 1.5 + 30, h), ' '.join(chars[:indice + 1]), "white"))
+
+            total_w += t.get_width()
