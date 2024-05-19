@@ -32,5 +32,4 @@ class Button:
                 return True
         else:
             self.color = pygame.Color("gray")
-            pygame.mouse.set_cursor(*pygame.cursors.arrow)
         return False
