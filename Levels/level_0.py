@@ -12,8 +12,8 @@ class Level0(Level):
         self.screen = screen
         self.pos = 0
         self.images = {}
-        self.sair = Button((225, 450), (150, 50), pygame.Color("gray"), "Sair")
-        self.ranking = Button((425, 450), (150, 50), pygame.Color("gray"), "Ranking")
+        self.sair = Button((325, 480), (150, 50), pygame.Color("gray"), "Sair")
+        self.ranking = Button((325, 420), (150, 50), pygame.Color("gray"), "Ranking")
         self.jogar = Button((300, 300), (200, 100), pygame.Color("gray"), "Jogar")
         self.logo: pygame.Surface
 
