@@ -1,5 +1,7 @@
 import pygame
 
+from UI.typography import Typography
+
 WINDOW_SIZE = (800, 600)
 TILE_SIZE = 30
 PLAYER_VELOCITY = 200
@@ -29,3 +31,26 @@ class Spritesheet:
             self.image.set_colorkey(color_key, pygame.RLEACCEL)
 
         return self.image
+    
+def break_line(text:str, start_pos: pygame.Vector2) -> list[Typography]:
+    texts = []
+    chars = []
+    total_w = 0
+    indice = 0
+    chars = text.split(" ")
+    for i in chars:
+        t = pygame.font.Font("./resources/fonts/monogram.ttf", 32).render(i, True, "black")
+        indice = chars.index(i)
+        print(indice, i, t.get_width())
+        if total_w + t.get_width() > 300:
+            start_pos.y += 20
+            total_w = 0
+            texts.append(Typography(((start_pos.x, start_pos.y)), ' '.join(chars[:indice + 1]), "white"))
+            chars = chars[indice:]
+        elif total_w < 300 and indice == len(chars) - 1:
+            start_pos.y += 20
+            texts.append(Typography(((start_pos.x, start_pos.y)), ' '.join(chars[:indice + 1]), "white"))
+
+        total_w += t.get_width()
+
+    return texts

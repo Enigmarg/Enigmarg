@@ -5,11 +5,12 @@ from Levels.level import Level
 from UI.button import Button
 from UI.typography import Typography
 from UI.score import Score
+from util import break_line
 
 # TELA DE JOGO
 
 class Level3(Level):
-    def __init__(self, screen, transition_call, previous_level, quit_game):
+    def __init__(self, screen, transition_call):
         super().__init__(screen, transition_call)
         self.screen = screen
         self.voltar = Button((225, 450), (150, 50), pygame.Color("gray"), "Voltar")
@@ -36,11 +37,7 @@ class Level3(Level):
             "chalkboard": pygame.transform.scale_by(pygame.image.load("./resources/chalkboard.png").convert_alpha(), 1.5)
         }
 
-        self.render_question()
-
-       
-
-        
+        self.texts = break_line(self.text, pygame.Vector2(self.screen.get_width() / 2 - 150 * 1.5 + 30, 20))
 
         self.is_loaded = all(image is not None for image in self.images.values())
 
@@ -54,7 +51,7 @@ class Level3(Level):
         if keys[pygame.K_UP]:
             self.pool.next_question()
             self.text = self.pool.get_question()
-            self.render_question()
+            self.texts = break_line(self.text, pygame.Vector2(self.screen.get_width() / 2 - 150 * 1.5 + 30, 20))
 
         self.pos += 1
 
@@ -82,25 +79,3 @@ class Level3(Level):
 
         self.voltar.draw(self.screen)
         self.voltar.check_button()
-
-    def render_question(self):
-        self.texts = []
-        chars = []
-        total_w = 0
-        indice = 0
-        h = 20
-        chars = self.text.split(" ")
-        for i in chars:
-            t = pygame.font.Font("./resources/fonts/monogram.ttf", 32).render(i, True, "black")
-            indice = chars.index(i)
-            print(indice, i, t.get_width())
-            if total_w + t.get_width() > 300:
-                h += 20
-                total_w = 0
-                self.texts.append(Typography((self.screen.get_width() / 2 - 150 * 1.5 + 30, h), ' '.join(chars[:indice + 1]), "white"))
-                chars = chars[indice:]
-            elif total_w < 300 and indice == len(chars) - 1:
-                h += 20
-                self.texts.append(Typography((self.screen.get_width() / 2 - 150 * 1.5 + 30, h), ' '.join(chars[:indice + 1]), "white"))
-
-            total_w += t.get_width()

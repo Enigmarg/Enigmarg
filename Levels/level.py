@@ -1,3 +1,6 @@
+import pygame
+
+
 class Level:
     def __init__(self, screen, transition_call):
         """
@@ -13,7 +16,7 @@ class Level:
         """
         self.is_active: bool = False
         self.is_loaded: bool = False
-        self.screen = screen
+        self.screen: pygame.Surface = screen
         self.transition_call = transition_call
 
     def load(self):
