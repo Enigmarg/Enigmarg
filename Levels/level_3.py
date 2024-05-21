@@ -16,13 +16,19 @@ class Level3(Level):
         self.images = {}
         self.texts = []
         self.pos = 0
-        self.text = "Quais são os principais tópicos que devem ser abordados no parágrafo introdutório de uma redação modelo ENEM?"
-        self.a = Button((183, 465), (205, 90), pygame.Color("red"), "Frase temática")
-        self.b = Button((413, 325), (205, 90), pygame.Color("green"), "Conclusão do texto")
-        self.c = Button((183, 325), (205, 90), pygame.Color("blue"), "Tese")
-        self.d = Button((413, 465), (205, 90), pygame.Color("yellow"), "Apresentação do parágrafo D2")
+
+        self.a = Button((183, 465), (205, 90), pygame.Color("red"),
+                         "Frase temática")
+        self.b = Button((413, 325), (205, 90), pygame.Color("green"),
+                         "Conclusão do texto")
+        self.c = Button((183, 325), (205, 90), pygame.Color("blue"),
+                         "Tese")
+        self.d = Button((413, 465), (205, 90), pygame.Color("yellow"),
+                         "Apresentação do parágrafo D2")
         self.voltar = Button((10, 465), (150, 50), pygame.Color("gray"), "Voltar")
+
         self.score = None
+
         with open("./resources/questions.json", "r", -1, "UTF-8") as file:
             data = json.load(file)
             self.pool = QuestionPool(data)
@@ -32,15 +38,13 @@ class Level3(Level):
     def load(self):
         self.is_loaded = True
         self.images = {
-            "background": pygame.image.load("./resources/background.png").convert(),
-            "chalkboard": pygame.transform.scale_by(pygame.image.load("./resources/chalkboard.png").convert_alpha(), 1.5)
+            "background": pygame.image.load("./resources/background.png")
+            .convert(),
+            "chalkboard": pygame.transform.scale_by(pygame.image.load("./resources/chalkboard.png")
+                                                    .convert_alpha(), 1.5)
         }
 
         self.render_question()
-
-       
-
-        
 
         self.is_loaded = all(image is not None for image in self.images.values())
 
@@ -97,10 +101,12 @@ class Level3(Level):
             if total_w + t.get_width() > 300:
                 h += 20
                 total_w = 0
-                self.texts.append(Typography((self.screen.get_width() / 2 - 150 * 1.5 + 30, h), ' '.join(chars[:indice + 1]), "white"))
+                self.texts.append(Typography((self.screen.get_width() / 2 - 150 * 1.5 + 30, h),
+                                              ' '.join(chars[:indice + 1]), "white"))
                 chars = chars[indice:]
             elif total_w < 300 and indice == len(chars) - 1:
                 h += 20
-                self.texts.append(Typography((self.screen.get_width() / 2 - 150 * 1.5 + 30, h), ' '.join(chars[:indice + 1]), "white"))
+                self.texts.append(Typography((self.screen.get_width() / 2 - 150 * 1.5 + 30, h),
+                                              ' '.join(chars[:indice + 1]), "white"))
 
             total_w += t.get_width()

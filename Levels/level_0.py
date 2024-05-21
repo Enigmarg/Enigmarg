@@ -17,6 +17,7 @@ class Level0(Level):
         self.ranking = Button((425, 450), (150, 50), pygame.Color("gray"), "Ranking")
         self.jogar = Button((300, 300), (200, 100), pygame.Color("gray"), "Jogar")
         self.logo: pygame.Surface
+        self.speaker: ImageButton
 
     def load(self):
         self.pos = 0
@@ -24,8 +25,10 @@ class Level0(Level):
         self.images = {
             "background": pygame.image.load("./resources/background.png").convert(),
             "logo": pygame.image.load("./resources/logo.png").convert_alpha(),
-            "speaker": pygame.transform.scale_by(pygame.image.load("./resources/speaker.png").convert_alpha(), 1.5),
-            "speaker_d": pygame.transform.scale_by(pygame.image.load("./resources/speaker_d.png").convert_alpha(), 1.5)
+            "speaker": pygame.transform.scale_by(pygame.image.load("./resources/speaker.png")
+                                                 .convert_alpha(), 1.5),
+            "speaker_d": pygame.transform.scale_by(pygame.image.load("./resources/speaker_d.png")
+                                                   .convert_alpha(), 1.5)
         }
 
         self.logo = pygame.transform.scale_by(self.images["logo"], 0.6)

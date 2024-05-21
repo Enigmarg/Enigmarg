@@ -1,7 +1,8 @@
 import pygame
 
 class ImageButton:
-    def __init__(self, position:tuple[int,int], default_image:pygame.Surface, hover_image:pygame.Surface):
+    def __init__(self, position:tuple[int,int],
+                  default_image:pygame.Surface, hover_image:pygame.Surface):
         self.position = position
         self.default_image = default_image
         self.hover_image = hover_image

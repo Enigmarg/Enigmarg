@@ -2,7 +2,6 @@ import pygame
 from Levels.level_3 import Level3
 from util import WINDOW_SIZE
 from Levels.level_0 import Level0
-from Levels.level_1 import Level1
 from Levels.level import Level
 
 
