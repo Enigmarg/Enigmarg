@@ -7,6 +7,7 @@ class Button:
         self.color = color
         self.text = text
         self.border_color = pygame.Color("white")
+        self.clicked = False
         self.font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
 
 #Definindo a interface dos botões.
@@ -19,17 +20,22 @@ class Button:
         text_rect = text_surface.get_rect(center=self.rect.center)
         surface.blit(text_surface, text_rect)
 
-#Pegando a posição do mouse para ativar a funcionalidade dos funções.
-    def mouse_pos(self) -> tuple[int,int]:
-        pos = pygame.mouse.get_pos()
-        return pos
-
     def check_button(self) -> bool:
-        if self.rect.collidepoint(self.mouse_pos()):
+        mouse_pos = pygame.mouse.get_pos()
+
+        if self.rect.collidepoint(mouse_pos):
             self.color = pygame.Color("black")
 
-            if pygame.mouse.get_pressed()[0]:
-                return True
+            if pygame.mouse.get_pressed()[0] and not self.clicked:
+                # Set the flag to True when the button is clicked
+                self.clicked = True
         else:
             self.color = pygame.Color("gray")
+            # Reset the flag when the button is not clicked
+            self.clicked = False
+
+        if not pygame.mouse.get_pressed()[0] and self.clicked:
+            # Return True only when the button is clicked and the mouse button is released
+            return True
+
         return False

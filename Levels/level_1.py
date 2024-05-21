@@ -32,7 +32,10 @@ class Level1(Level):
             "clouds": pygame.image.load("./resources/clouds.png")
         }
     
-        print(self.layers)
+        self.is_loaded = True
+
+    def run(self):
+        dt = pygame.time.get_ticks() / 1000
 
         self.screen.fill("black")
 
@@ -45,11 +48,7 @@ class Level1(Level):
 
         for layer in self.layers:
             for tile in self.layers[layer]:
-                self.screen.blit(tile[2], (tile[0] * 30 + self.x, tile[1] * 30))
-        self.is_loaded = True
-
-    def run(self):
-        dt = pygame.time.get_ticks() / 1000
+                self.screen.blit(tile[2], (tile[0] * 30 + self.x * 2.5, tile[1] * 30))
 
         keys = pygame.key.get_pressed()
         self.player.acceleration = pygame.Vector2(0, 0)
@@ -68,7 +67,6 @@ class Level1(Level):
             self.cloudx -= self.player.acceleration.x / 3
 
         if abs(self.x) > 800:
-            self.transition_call(Level3(self.screen, self.transition_call))
             self.x = 0
         if abs(self.cloudx) > 800:
             self.cloudx = 0

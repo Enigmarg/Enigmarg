@@ -6,7 +6,17 @@ class QuestionPool:
     def get_question(self) -> str:
         return self.questions[self.current_question]["question"]
     
+    def get_questions(self) -> list[dict]:
+        return self.questions
+
     def next_question(self) -> None:
-        self.current_question += 1
-        if self.current_question == len(self.questions):
-            self.current_question = 0
+        self.current_question = 0
+
+    def get_answers(self) -> list[dict]:
+        return self.questions[self.current_question]["answers"]
+
+    def is_correct_answer(self, guess:str) -> bool:
+        for a in self.questions[self.current_question]["answers"]:
+            if a["text"] == guess:
+                return a["correct"]
+        return False
