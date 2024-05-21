@@ -9,7 +9,7 @@ from UI.score import Score
 # TELA DE JOGO
 
 class Level3(Level):
-    def __init__(self, screen, transition_call, previous_level, quit_game):
+    def __init__(self, screen, transition_call):
         super().__init__(screen, transition_call)
         self.screen = screen
         self.voltar = Button((225, 450), (150, 50), pygame.Color("gray"), "Voltar")

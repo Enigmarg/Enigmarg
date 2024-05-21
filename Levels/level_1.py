@@ -21,7 +21,6 @@ class Level1(Level):
         self.is_loaded = True
 
     def run(self):
-        on_cutscene = True
         dt = pygame.time.get_ticks() / 1000
 
         self.screen.fill("black")
@@ -49,7 +48,7 @@ class Level1(Level):
             self.cloudx -= self.player.acceleration.x / 3
 
         if abs(self.x) > 800:
-            self.transition_call(Level3(self.screen, self.transition_call, self.quit, self.previous))
+            self.transition_call(Level3(self.screen, self.transition_call))
             self.x = 0
         if abs(self.cloudx) > 800:
             self.cloudx = 0
