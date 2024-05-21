@@ -1,7 +1,7 @@
 import pygame
+from Levels.level_3 import Level3
 from util import WINDOW_SIZE
 from Levels.level_0 import Level0
-from Levels.level_1 import Level1
 from Levels.level import Level
 
 
@@ -20,12 +20,12 @@ class Engine():
         self.loaded = False
 
     def run(self):
-        # font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
-        mixer = pygame.mixer
-        #! MUDAR !!!!
-        #menu = mixer.Sound("./resources/shh.wav")
-        #menu.set_volume(0.6)
-        #menu.play(-1)
+        # # font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
+        # mixer = pygame.mixer
+        # #! MUDAR !!!!
+        # menu = mixer.Sound("./resources/sounds/main_menu.wav")
+        # menu.set_volume(0.15)
+        # menu.play(-1)
 
         while self.running:
             if not self.loaded:
@@ -44,7 +44,7 @@ class Engine():
                         self.running = False
                     case pygame.KEYDOWN:
                         if event.key == pygame.K_d:
-                            self.call_transition(Level1(self.screen, self.call_transition))
+                            self.call_transition(Level3(self.screen, self.call_transition))
                         if event.key == pygame.K_e:
                             self.call_transition(
                                 Level0(self.screen, self.call_transition, self.quit))

@@ -18,7 +18,7 @@ class Level:
 
     def load(self):
         """
-        Loads the level data from a file.
+        Loads the level data
         """
 
     def run(self):
@@ -26,7 +26,7 @@ class Level:
         This method is responsible for executing the logic of the level.
         """
 
-    def get_status(self):
+    def get_status(self) -> bool:
         """
         Returns the status of the object.
 

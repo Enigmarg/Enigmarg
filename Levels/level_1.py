@@ -1,12 +1,13 @@
 import pygame
 from Levels.level import Level
 from Classes.player import Player
+from Levels.level_3 import Level3
 from UI.score import Score
 
 class Level1(Level):
     def __init__(self, screen, transition_caller):
         super().__init__(screen, transition_caller)
-        self.player = Player()
+        self.player = Player(pygame.Vector2(300, 400))
         self.x = 0
         self.cloudx = 0
         self.images = {}
@@ -21,6 +22,7 @@ class Level1(Level):
 
     def run(self):
         dt = pygame.time.get_ticks() / 1000
+
         self.screen.fill("black")
         self.screen.blit(self.images["cloud"], (0 + self.cloudx,0))
         self.screen.blit(self.images["cloud"], (self.cloudx + 800,0))
@@ -33,19 +35,20 @@ class Level1(Level):
         self.player.acceleration = pygame.Vector2(0, 0)
 
         if keys[pygame.K_UP]:
-            self.player.acceleration.y = -6
+            self.player.walk("up")
         if keys[pygame.K_DOWN]:
-            self.player.acceleration.y = 6
+            self.player.walk("down")
         if keys[pygame.K_LEFT]:
-            self.player.acceleration.x = -6
+            self.player.walk("left")
         if keys[pygame.K_RIGHT]:
-            self.player.acceleration.x = 6
+            self.player.walk("right")
 
         if self.player.acceleration.x > 0 or self.player.acceleration.x < 0:
             self.x -= self.player.acceleration.x / 5
             self.cloudx -= self.player.acceleration.x / 3
 
         if abs(self.x) > 800:
+            self.transition_call(Level3(self.screen, self.transition_call))
             self.x = 0
         if abs(self.cloudx) > 800:
             self.cloudx = 0

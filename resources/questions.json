@@ -1,0 +1,106 @@
+[
+  {
+    "id": 0,
+    "question": "Quais as chances de um meteorito atingir a Terra?",
+    "answers": [
+      {
+        "id": 0,
+        "text": "Paris",
+        "correct": true
+      },
+      {
+        "id": 1,
+        "text": "London",
+        "correct": false
+      },
+      {
+        "id": 2,
+        "text": "Berlin",
+        "correct": false
+      },
+      {
+        "id": 3,
+        "text": "Madrid",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "question": "Qual a capital da França?",
+    "answers": [
+      {
+        "id": 0,
+        "text": "Paris",
+        "correct": true
+      },
+      {
+        "id": 1,
+        "text": "London",
+        "correct": false
+      },
+      {
+        "id": 2,
+        "text": "Berlin",
+        "correct": false
+      },
+      {
+        "id": 3,
+        "text": "Madrid",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Qual a capital da Inglaterra?",
+    "answers": [
+      {
+        "id": 0,
+        "text": "Paris",
+        "correct": false
+      },
+      {
+        "id": 1,
+        "text": "London",
+        "correct": true
+      },
+      {
+        "id": 2,
+        "text": "Berlin",
+        "correct": false
+      },
+      {
+        "id": 3,
+        "text": "Madrid",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Qual a capital da Alemanha?",
+    "answers": [
+      {
+        "id": 0,
+        "text": "Paris",
+        "correct": false
+      },
+      {
+        "id": 1,
+        "text": "London",
+        "correct": false
+      },
+      {
+        "id": 2,
+        "text": "Berlin",
+        "correct": true
+      },
+      {
+        "id": 3,
+        "text": "Madrid",
+        "correct": false
+      }
+    ]
+  }
+]
