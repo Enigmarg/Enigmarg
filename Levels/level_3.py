@@ -4,7 +4,6 @@ from Classes.question_pool import QuestionPool
 from Levels.level import Level
 from Levels.level_4 import Level4
 from UI.button import Button
-from UI.typography import Typography
 from UI.score import Score
 from util import break_line
 
@@ -74,7 +73,7 @@ class Level3(Level):
         print(self.pool.current_question, len(self.pool.questions))
         self.pool.questions.pop(0)
         if len(self.pool.questions) <= 1:
-            self.transition_call(Level4(self.screen, self.transition_call))
+            self.transition_call(Level4(self.screen, self.transition_call, self.score.score))
 
         self.pool.next_question()
         self.text = self.pool.get_question()

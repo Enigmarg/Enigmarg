@@ -49,7 +49,7 @@ class Engine():
                         if event.key == pygame.K_e:
                             self.call_transition(
                                 Level0(self.screen, self.call_transition, self.quit))
-                        if event.key == pygame.K_q:
+                        if event.key == pygame.K_ESCAPE:
                             self.running = False
 
             if self.active_scene:
