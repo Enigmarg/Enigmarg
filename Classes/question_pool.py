@@ -4,7 +4,6 @@ class QuestionPool:
         self.current_question = 0
 
     def get_question(self) -> str:
-        print(self.current_question)
         if len(self.questions) == 0:
             return "No questions left"
 

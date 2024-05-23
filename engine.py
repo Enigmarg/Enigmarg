@@ -1,10 +1,8 @@
-from ctypes.wintypes import DOUBLE
 import pygame
+from Levels.level import Level
+from Levels.level_0 import Level0
 from Levels.level_3 import Level3
 from util import WINDOW_SIZE
-from Levels.level_0 import Level0
-from Levels.level_1 import Level1
-from Levels.level import Level
 
 
 class Engine():
@@ -12,7 +10,9 @@ class Engine():
         # Initializes pygame modules
         pygame.init()
 
-        self.screen = pygame.display.set_mode(WINDOW_SIZE, pygame.DOUBLEBUF | pygame.HWSURFACE | pygame.RESIZABLE)
+        self.screen = pygame.display.set_mode(WINDOW_SIZE,
+                                               pygame.DOUBLEBUF | pygame.HWSURFACE
+                                                 | pygame.RESIZABLE)
         self.clock = pygame.time.Clock()
         self.running = True
         self.transition = 0

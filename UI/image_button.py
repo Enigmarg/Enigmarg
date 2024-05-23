@@ -1,7 +1,8 @@
 import pygame
 
 class ImageButton:
-    def __init__(self, position:tuple[int,int], default_image:pygame.Surface, hover_image:pygame.Surface):
+    def __init__(self, position:tuple[int,int],
+                  default_image:pygame.Surface, hover_image:pygame.Surface):
         self.position = position
         self.default_image = default_image
         self.hover_image = hover_image
@@ -16,13 +17,10 @@ class ImageButton:
         mouse_pos = pygame.mouse.get_pos()
 
         if self.rect.collidepoint(mouse_pos):
-            self.color = pygame.Color("black")
-
             if pygame.mouse.get_pressed()[0] and not self.clicked:
                 # Set the flag to True when the button is clicked
                 self.clicked = True
         else:
-            self.color = pygame.Color("gray")
             # Reset the flag when the button is not clicked
             self.clicked = False
 

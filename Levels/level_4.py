@@ -1,8 +1,6 @@
 import pygame
 from util import WINDOW_SIZE
 from Levels.level import Level
-from UI.button import Button
-from UI.typography import Typography
 from UI.score import Score
 
 # TELA DE RANKING
@@ -13,9 +11,12 @@ class Level4(Level):
         self.screen = screen
         self.images = {}
         self.pos = 0
-        self.texto1 = pygame.font.Font("./resources/fonts/monogram.ttf", 40)
-        self.texto2 = pygame.font.Font("./resources/fonts/monogram.ttf", 30)
-        self.texto3 = pygame.font.Font("./resources/fonts/monogram.ttf", 20)
+        self.font1 = pygame.font.Font("./resources/fonts/monogram.ttf", 40)
+        self.font2 = pygame.font.Font("./resources/fonts/monogram.ttf", 30)
+        self.font3 = pygame.font.Font("./resources/fonts/monogram.ttf", 20)
+        self.texto1: pygame.Surface
+        self.texto2: pygame.Surface
+        self.texto3: pygame.Surface
 
         self.logo: pygame.Surface
         self.pontuacao = Score((345, 400), (100, 50), pygame.Color("gray"))
@@ -33,9 +34,9 @@ class Level4(Level):
 
         self.pontuacao.score = self.score
         self.is_loaded = all(image is not None for image in self.images.values())
-        self.texto1 = self.texto1.render("Parabéns! Você concluiu todas as questões.", True, "white")
-        self.texto2 = self.texto2.render("Essa foi sua pontuação.", True, "white")
-        self.texto3 = self.texto3.render("Pressione esc para sair do jogo.", True, "PeachPuff4")
+        self.texto1 = self.font1.render("Parabéns! Você concluiu todas as questões.", True, "white")
+        self.texto2 = self.font2.render("Essa foi sua pontuação.", True, "white")
+        self.texto3 = self.font3.render("Pressione esc para sair do jogo.", True, "PeachPuff4")
 
     def run(self):
         self.screen.fill("black")

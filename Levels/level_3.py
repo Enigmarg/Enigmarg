@@ -30,8 +30,10 @@ class Level3(Level):
 
     def load(self):
         self.images = {
-            "background": pygame.image.load("./resources/background.png").convert_alpha(),
-            "chalkboard": pygame.transform.scale_by(pygame.image.load("./resources/chalkboard.png").convert_alpha(), 1.5)
+            "background": pygame.image.load("./resources/background.png")
+                                                    .convert_alpha(),
+            "chalkboard": pygame.transform.scale_by(pygame.image.load("./resources/chalkboard.png")
+                                                    .convert_alpha(), 1.5)
         }
 
         self.next_question(True)
@@ -53,7 +55,8 @@ class Level3(Level):
             i.draw(self.screen)
 
         # Não mexer, não sei oq faz mas funciona
-        cur_level = f"Level {self.len_questions - len(self.pool.questions) + 1} / {self.len_questions}"
+        cur_level = str.format(f'Level {self.len_questions
+                                         - len(self.pool.questions) + 1} / {self.len_questions}')
         font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
         text = font.render(cur_level, True, pygame.Color("gray"))
 
@@ -72,7 +75,7 @@ class Level3(Level):
     def next_question(self, first=False):
         self.score.increment_score()
         if len(self.pool.questions) == 1:
-            self.transition_call(Level4(self.screen, self.transition_call))
+            self.transition_call(Level4(self.screen, self.transition_call, self.score.score))
         else:
             if not first:
                 self.pool.questions.pop(0)
@@ -81,5 +84,9 @@ class Level3(Level):
             self.answers = self.pool.get_answers()
             self.answer_btn = []
             for a in self.answers:
-                self.answer_btn.append(Button((WINDOW_SIZE[0] / 2 - 150, WINDOW_SIZE[1] / 2 + 120 * self.answers.index(a) / 2 + 50), (300, 40), pygame.Color("gray"), a["text"]))
-            self.texts = break_line(self.text, pygame.Vector2(WINDOW_SIZE[0] / 2 - 150 * 1.5 + 30, 40))
+                self.answer_btn.append(Button((WINDOW_SIZE[0] / 2 - 150,
+                                                WINDOW_SIZE[1] / 2 + 120 *
+                                                  self.answers.index(a) / 2 + 50)
+                                              , (300, 40), pygame.Color("gray"), a["text"]))
+            self.texts = break_line(self.text,
+                                     pygame.Vector2(WINDOW_SIZE[0] / 2 - 150 * 1.5 + 30, 40))

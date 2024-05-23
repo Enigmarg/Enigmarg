@@ -1,10 +1,9 @@
 import pygame
-from Levels.level import Level
-from Classes.player import Player
-from Levels.level_3 import Level3
-from UI.score import Score
-from pytmx.util_pygame import load_pygame
 from pytmx import pytmx
+from pytmx.util_pygame import load_pygame
+from Levels.level import Level
+from Levels.level_3 import Level3
+from Classes.player import Player
 
 class Level1(Level):
     def __init__(self, screen, transition_call):
@@ -14,10 +13,11 @@ class Level1(Level):
         self.cloudx = 0
         self.images = {}
         self.score = None
+        self.obstacles: pygame.sprite.Group
+        self.layers = {}
+        self.door: pygame.sprite.Sprite
 
     def load(self):
-        self.layers = {}
-
         tmx_data = load_pygame("./resources/level0.tmx")
         for layer in tmx_data.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer):
@@ -29,14 +29,13 @@ class Level1(Level):
 
         self.obstacles = pygame.sprite.Group()
 
-        for object in tmx_data.objects:
-            print(object.type)
-            if object.type == "door":
+        for obj in tmx_data.objects:
+            if obj.type == "door":
                 self.door = pygame.sprite.Sprite()
-                self.door.rect = pygame.rect.Rect(object.x, object.y, object.width, object.height)
+                self.door.rect = pygame.rect.Rect(obj.x, obj.y, obj.width, obj.height)
             else:
                 obstacle = pygame.sprite.Sprite()
-                obstacle.rect = pygame.rect.Rect(object.x, object.y, object.width, object.height)
+                obstacle.rect = pygame.rect.Rect(obj.x, obj.y, obj.width, obj.height)
                 self.obstacles.add(obstacle)
 
         self.images = {
@@ -53,13 +52,8 @@ class Level1(Level):
         self.screen.blit(self.images["clouds"], (self.cloudx, 0))
         self.screen.blit(self.images["background"], (self.x, 100))
 
-        player_tile_x = int(self.player.position.x / 30)
-        player_tile_y = int(self.player.position.y / 30)
-
-        print(self.door.rect.x)
-
-        for layer in self.layers:
-            for tile in self.layers[layer]:
+        for _, tiles in self.layers.items():
+            for tile in tiles:
                 self.screen.blit(tile[2], (tile[0] * 30 + self.x * 2.5, tile[1] * 30))
 
         pygame.draw.rect(self.screen, "blue", self.door.rect)
@@ -67,15 +61,7 @@ class Level1(Level):
         keys = pygame.key.get_pressed()
         self.player.acceleration = pygame.Vector2(0, 0)
 
-        if self.check_door():
-            self.is_active = False
-            self.transition_call(Level3(self.screen, self.transition_call))
-            return
-
-        if not self.check_colision():
-            self.player.change_movement(True)
-        else:
-            self.player.change_movement(False)
+        self.check_collision()
 
         if keys[pygame.K_UP]:
             self.player.walk("up")
@@ -86,24 +72,33 @@ class Level1(Level):
         if keys[pygame.K_RIGHT]:
             self.player.walk("right")
 
-        print(self.player.position)
-
         if self.player.acceleration.x != 0:
             if self.player.position.x > self.screen.get_width() / 2:
                 self.x -= self.player.acceleration.x / 5
                 self.cloudx -= self.player.acceleration.x / 3
+                self.door.rect.x -= self.player.acceleration.x / 5 * 2.5
+
 
             if abs(self.x) > 2400:
                 self.x = 0
             if abs(self.cloudx) > 2400:
                 self.cloudx = 0
 
-        self.door.rect.x -= self.player.acceleration.x / 5 * 2.5
-
         self.player.move(dt)
         self.player.draw(self.screen)
 
-    def check_colision(self):
+    def check_collision(self):
+        if self.check_door():
+            self.is_active = False
+            self.transition_call(Level3(self.screen, self.transition_call))
+            return
+
+        if not self.check_obstacles():
+            self.player.change_movement(True)
+        else:
+            self.player.change_movement(False)
+
+    def check_obstacles(self):
         return self.player.get_rect().collidelist([obstacle.rect for obstacle in self.obstacles])
 
     def check_door(self):

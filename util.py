@@ -17,7 +17,8 @@ class Spritesheet:
         try:
             self.sheet = pygame.image.load(imagepath).convert_alpha()
         except Exception as e:
-                pass
+            print(f"Unable to load spritesheet image: {imagepath}")
+            raise e
     # Access each individual sprite via its position in the sheet
     def image_at(self, x, y, color_key=None):
         self.rect = pygame.Rect(x * self.size_x, y * self.size_y, self.size_x, self.size_y)
@@ -30,7 +31,7 @@ class Spritesheet:
             self.image.set_colorkey(color_key, pygame.RLEACCEL)
 
         return self.image
-    
+
 def break_line(text:str, start_pos: pygame.Vector2, max_size=300) -> list[Typography]:
     texts = []
     chars = []
@@ -43,11 +44,13 @@ def break_line(text:str, start_pos: pygame.Vector2, max_size=300) -> list[Typogr
         if total_w + t.get_width() > max_size:
             start_pos.y += 20
             total_w = 0
-            texts.append(Typography(((start_pos.x, start_pos.y)), ' '.join(chars[:indice + 1]), "white"))
+            texts.append(Typography(((start_pos.x, start_pos.y)),
+                                     ' '.join(chars[:indice + 1]), "white"))
             chars = chars[indice:]
         elif total_w < max_size and indice == len(chars) - 1:
             start_pos.y += 20
-            texts.append(Typography(((start_pos.x, start_pos.y)), ' '.join(chars[:indice + 1]), "white"))
+            texts.append(Typography(((start_pos.x, start_pos.y)),
+                                     ' '.join(chars[:indice + 1]), "white"))
 
         total_w += t.get_width()
 

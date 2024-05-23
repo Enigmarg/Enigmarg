@@ -72,9 +72,9 @@ class Player:
             self.sprite = self.animations[self.facing][0]
 
     def get_rect(self):
-        return pygame.rect.Rect(self.position.x + 15, self.position.y + 50, self.mask.get_size()[0] - 30, self.mask.get_size()[1] - 50)
-    
+        return pygame.rect.Rect(self.position.x + 15, self.position.y + 50,
+                                 self.mask.get_size()[0] - 30, self.mask.get_size()[1] - 50)
+
     def change_movement(self, collided):
         self.position.y = self.position.y
         self.is_colliding = collided
-        
