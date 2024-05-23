@@ -7,9 +7,9 @@ from pytmx.util_pygame import load_pygame
 from pytmx import pytmx
 
 class Level1(Level):
-    def __init__(self, screen, transition_caller):
-        super().__init__(screen, transition_caller)
-        self.player = Player(pygame.Vector2(300, 400))
+    def __init__(self, screen, transition_call):
+        super().__init__(screen, transition_call)
+        self.player = Player(pygame.Vector2(300, 550))
         self.x = 0
         self.cloudx = 0
         self.images = {}
@@ -26,6 +26,18 @@ class Level1(Level):
                     tile = tmx_data.get_tile_image_by_gid(gid)
                     if tile:
                         self.layers[layer.name].append((x, y, tile))
+
+        self.obstacles = pygame.sprite.Group()
+
+        for object in tmx_data.objects:
+            print(object.type)
+            if object.type == "door":
+                self.door = pygame.sprite.Sprite()
+                self.door.rect = pygame.rect.Rect(object.x, object.y, object.width, object.height)
+            else:
+                obstacle = pygame.sprite.Sprite()
+                obstacle.rect = pygame.rect.Rect(object.x, object.y, object.width, object.height)
+                self.obstacles.add(obstacle)
 
         self.images = {
             "background": pygame.image.load("./resources/teste.png"),
@@ -44,14 +56,26 @@ class Level1(Level):
         player_tile_x = int(self.player.position.x / 30)
         player_tile_y = int(self.player.position.y / 30)
 
-        # Blit all the tiles once
-        for layer in self.layers.values():
-            for tile in layer:
+        print(self.door.rect.x)
+
+        for layer in self.layers:
+            for tile in self.layers[layer]:
                 self.screen.blit(tile[2], (tile[0] * 30 + self.x * 2.5, tile[1] * 30))
 
+        pygame.draw.rect(self.screen, "blue", self.door.rect)
 
         keys = pygame.key.get_pressed()
         self.player.acceleration = pygame.Vector2(0, 0)
+
+        if self.check_door():
+            self.is_active = False
+            self.transition_call(Level3(self.screen, self.transition_call))
+            return
+
+        if not self.check_colision():
+            self.player.change_movement(True)
+        else:
+            self.player.change_movement(False)
 
         if keys[pygame.K_UP]:
             self.player.walk("up")
@@ -74,8 +98,16 @@ class Level1(Level):
             if abs(self.cloudx) > 2400:
                 self.cloudx = 0
 
+        self.door.rect.x -= self.player.acceleration.x / 5 * 2.5
+
         self.player.move(dt)
         self.player.draw(self.screen)
+
+    def check_colision(self):
+        return self.player.get_rect().collidelist([obstacle.rect for obstacle in self.obstacles])
+
+    def check_door(self):
+        return self.player.get_rect().colliderect(self.door.rect)
 
     def get_status(self):
         return self.is_active
