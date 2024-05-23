@@ -26,7 +26,7 @@ class Level1(Level):
                     tile = tmx_data.get_tile_image_by_gid(gid)
                     if tile:
                         self.layers[layer.name].append((x, y, tile))
-                    
+
         self.obstacles = pygame.sprite.Group()
 
         for object in tmx_data.objects:
@@ -37,14 +37,13 @@ class Level1(Level):
             else:
                 obstacle = pygame.sprite.Sprite()
                 obstacle.rect = pygame.rect.Rect(object.x, object.y, object.width, object.height)
-                self.obstacles.add(obstacle) 
-          
-        
+                self.obstacles.add(obstacle)
+
         self.images = {
             "background": pygame.image.load("./resources/teste.png"),
             "clouds": pygame.image.load("./resources/clouds.png")
         }
-    
+
         self.is_loaded = True
 
     def run(self):
@@ -59,29 +58,26 @@ class Level1(Level):
         self.screen.blit(self.images["background"], (self.x + 800, 100))
         self.screen.blit(self.images["background"], (self.x - 800, 100))
 
-        print(self.player.get_rect()[0] + self.x * 2.5)
-
-
+        print(self.door.rect.x)
 
         for layer in self.layers:
             for tile in self.layers[layer]:
                 self.screen.blit(tile[2], (tile[0] * 30 + self.x * 2.5, tile[1] * 30))
+
         pygame.draw.rect(self.screen, "blue", self.door.rect)
 
         keys = pygame.key.get_pressed()
         self.player.acceleration = pygame.Vector2(0, 0)
-        
+
         if self.check_door():
             self.is_active = False
             self.transition_call(Level3(self.screen, self.transition_call))
             return
-            
 
         if not self.check_colision():
             self.player.change_movement(True)
         else:
             self.player.change_movement(False)
-
 
         if keys[pygame.K_UP]:
             self.player.walk("up")
@@ -95,25 +91,22 @@ class Level1(Level):
         if self.player.acceleration.x > 0 or self.player.acceleration.x < 0:
             self.x -= self.player.acceleration.x / 5
             self.cloudx -= self.player.acceleration.x / 3
-        
 
         if abs(self.x) > 800:
             self.x = 0
         if abs(self.cloudx) > 800:
             self.cloudx = 0
 
+        self.door.rect.x -= self.player.acceleration.x / 5 * 2.5
+
         self.player.move(dt)
         self.player.draw(self.screen)
 
-    
     def check_colision(self):
         return self.player.get_rect().collidelist([obstacle.rect for obstacle in self.obstacles])
-    
 
-    
     def check_door(self):
         return self.player.get_rect().colliderect(self.door.rect)
-
 
     def get_status(self):
         return self.is_active
