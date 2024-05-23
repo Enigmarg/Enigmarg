@@ -1,6 +1,7 @@
 import pygame
 from Levels.level import Level
 from UI.button import Button
+from util import WINDOW_SIZE
 
 # TELA DE RANKING
 
@@ -22,9 +23,9 @@ class Level4(Level):
     def run(self):
         self.screen.fill("black")
         self.screen.blit(self.images["background"], (self.pos, 0))
-        self.screen.blit(self.images["background"], (self.pos - self.screen.get_width(), 0))
+        self.screen.blit(self.images["background"], (self.pos - WINDOW_SIZE[0], 0))
 
         self.pos += 1
 
-        if self.pos >= self.screen.get_width():
+        if self.pos >= WINDOW_SIZE[0]:
             self.pos = 0

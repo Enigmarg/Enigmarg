@@ -4,6 +4,7 @@ from Levels.level_1 import Level1
 from Levels.level_2 import Level2
 from UI.button import Button
 from UI.image_button import ImageButton
+from util import WINDOW_SIZE
 
 # TELA DE MENU
 class Level0(Level):
@@ -38,12 +39,11 @@ class Level0(Level):
         if self.is_loaded:
             self.screen.fill("black")
             self.screen.blit(self.images["background"], (self.pos, 0))
-            self.screen.blit(self.images["background"], (self.pos - self.screen.get_width(), 0))
-            self.screen.blit(self.logo, ((self.screen.get_width() / 2 - self.logo.get_width()
+            self.screen.blit(self.logo, ((WINDOW_SIZE[0] / 2 - self.logo.get_width()
                                         // 2), 70))
             # self.screen.blit(self.images["speaker"], (700, 500))
 
-            self.pos += 1
+            self.pos -= 1
 
             self.jogar.draw(self.screen)
             if self.jogar.check_button():
@@ -57,11 +57,12 @@ class Level0(Level):
             if self.sair.check_button():
                 self.quit()
 
+
             self.speaker.draw(self.screen)
             if self.speaker.check_click():
                 pygame.mixer.pause()
             else:
                 pygame.mixer.unpause()
 
-            if self.pos >= self.screen.get_width():
+            if abs(self.pos) > WINDOW_SIZE[0]:
                 self.pos = 0

@@ -1,3 +1,4 @@
+from ctypes.wintypes import DOUBLE
 import pygame
 from Levels.level_3 import Level3
 from util import WINDOW_SIZE
@@ -11,7 +12,7 @@ class Engine():
         # Initializes pygame modules
         pygame.init()
 
-        self.screen = pygame.display.set_mode(WINDOW_SIZE)
+        self.screen = pygame.display.set_mode(WINDOW_SIZE, pygame.DOUBLEBUF | pygame.HWSURFACE | pygame.RESIZABLE)
         self.clock = pygame.time.Clock()
         self.running = True
         self.transition = 0
