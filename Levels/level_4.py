@@ -5,7 +5,6 @@ from UI.button import Button
 from UI.typography import Typography
 from UI.score import Score
 
-
 # TELA DE RANKING
 
 class Level4(Level):
@@ -40,8 +39,8 @@ class Level4(Level):
 
     def run(self):
         self.screen.fill("black")
+        self.screen.blit(self.images["background"], (self.pos - WINDOW_SIZE[0], 0))
         self.screen.blit(self.images["background"], (self.pos, 0))
-        self.screen.blit(self.images["background"], (self.pos - self.screen.get_width(), 0))
         self.screen.blit(self.logo, ((self.screen.get_width() / 2 - self.logo.get_width()
                                         // 2), 70))
 
@@ -49,10 +48,9 @@ class Level4(Level):
         self.screen.blit(self.texto2, (WINDOW_SIZE[0] / 2 - self.texto2.get_width() / 2, 350))
         self.screen.blit(self.texto3, (WINDOW_SIZE[0] / 2 - self.texto3.get_width() / 2, 500))
 
-        self.pos += 1
-
         self.pontuacao.draw(self.screen)
 
+        self.pos += 1
 
-        if self.pos >= self.screen.get_width():
+        if self.pos >= WINDOW_SIZE[0]:
             self.pos = 0

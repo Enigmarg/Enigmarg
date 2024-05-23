@@ -21,7 +21,7 @@ class Level1(Level):
         tmx_data = load_pygame("./resources/level0.tmx")
         for layer in tmx_data.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer):
-                for x, y, gid, in layer:
+                for x, y, gid, in layer: # type: ignore
                     self.layers[layer.name] = self.layers.get(layer.name, [])
                     tile = tmx_data.get_tile_image_by_gid(gid)
                     if tile:
@@ -47,16 +47,14 @@ class Level1(Level):
         self.is_loaded = True
 
     def run(self):
+        self.screen.fill("black")
         dt = pygame.time.get_ticks() / 1000
 
-        self.screen.fill("black")
+        self.screen.blit(self.images["clouds"], (self.cloudx, 0))
+        self.screen.blit(self.images["background"], (self.x, 100))
 
-        self.screen.blit(self.images["clouds"], (0 + self.cloudx,0))
-        self.screen.blit(self.images["clouds"], (self.cloudx + 800,0))
-        self.screen.blit(self.images["clouds"], (self.cloudx - 800,0))
-        self.screen.blit(self.images["background"], (0 + self.x, 100))
-        self.screen.blit(self.images["background"], (self.x + 800, 100))
-        self.screen.blit(self.images["background"], (self.x - 800, 100))
+        player_tile_x = int(self.player.position.x / 30)
+        player_tile_y = int(self.player.position.y / 30)
 
         print(self.door.rect.x)
 
@@ -88,14 +86,17 @@ class Level1(Level):
         if keys[pygame.K_RIGHT]:
             self.player.walk("right")
 
-        if self.player.acceleration.x > 0 or self.player.acceleration.x < 0:
-            self.x -= self.player.acceleration.x / 5
-            self.cloudx -= self.player.acceleration.x / 3
+        print(self.player.position)
 
-        if abs(self.x) > 800:
-            self.x = 0
-        if abs(self.cloudx) > 800:
-            self.cloudx = 0
+        if self.player.acceleration.x != 0:
+            if self.player.position.x > self.screen.get_width() / 2:
+                self.x -= self.player.acceleration.x / 5
+                self.cloudx -= self.player.acceleration.x / 3
+
+            if abs(self.x) > 2400:
+                self.x = 0
+            if abs(self.cloudx) > 2400:
+                self.cloudx = 0
 
         self.door.rect.x -= self.player.acceleration.x / 5 * 2.5
 
