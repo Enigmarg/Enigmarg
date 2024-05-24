@@ -58,8 +58,7 @@ class Level3(Level):
             i.draw(self.screen)
 
         # Não mexer, não sei oq faz mas funciona
-        cur_level = str.format(f'Level {self.len_questions
-                                         - len(self.pool.questions) + 1} / {self.len_questions}')
+        cur_level = f'Level {self.len_questions- len(self.pool.questions) + 1} / {self.len_questions}'
         font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
         text = font.render(cur_level, True, pygame.Color("gray"))
 
