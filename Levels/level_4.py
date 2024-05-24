@@ -19,7 +19,7 @@ class Level4(Level):
         self.texto3: pygame.Surface #Texto 3 = "Pressione esc para sair do jogo."
 
         self.logo: pygame.Surface
-        self.pontuacao = Score((345, 400), (100, 50), pygame.Color("gray")) 
+        self.pontuacao = Score((345, 400), (100, 50), pygame.Color("gray"))
         self.score = score
 
 

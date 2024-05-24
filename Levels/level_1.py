@@ -19,9 +19,9 @@ class Level1(Level):
 
     def load(self):
         tmx_data = load_pygame("./resources/level0.tmx") #Carrega o arquivo tmx
-        for layer in tmx_data.visible_layers: 
+        for layer in tmx_data.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer):
-                for x, y, gid, in layer: 
+                for x, y, gid, in layer:
                     self.layers[layer.name] = self.layers.get(layer.name, []) #Cria um dicionário com as camadas do mapa
                     tile = tmx_data.get_tile_image_by_gid(gid)
                     if tile:
@@ -48,7 +48,7 @@ class Level1(Level):
     def run(self):
         self.screen.fill("black")
 
-        dt = pygame.time.get_ticks() / 1000 
+        dt = pygame.time.get_ticks() / 1000
 
         self.screen.blit(self.images["clouds"], (self.cloudx, 0))
         self.screen.blit(self.images["background"], (self.x, 100))
@@ -60,7 +60,7 @@ class Level1(Level):
         keys = pygame.key.get_pressed()
         self.player.acceleration = pygame.Vector2(0, 0)
 
-        self.check_collision() 
+        self.check_collision()
 
         if keys[pygame.K_UP]: #Define a direção do movimento
             self.player.walk("up")
@@ -82,8 +82,8 @@ class Level1(Level):
             if abs(self.cloudx) > 2400:
                 self.cloudx = 0
 
-        self.player.move(dt) 
-        self.player.draw(self.screen) 
+        self.player.move(dt)
+        self.player.draw(self.screen)
 
     def check_collision(self):
         if self.check_door():
@@ -102,4 +102,4 @@ class Level1(Level):
         return self.player.get_rect().colliderect(self.door.rect) #Verifica se o jogador colide com a porta
 
     def get_status(self):
-        return self.is_active 
+        return self.is_active

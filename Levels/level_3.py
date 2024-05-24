@@ -62,7 +62,7 @@ class Level3(Level):
         font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
         text = font.render(cur_level, True, pygame.Color("gray"))
 
-        self.screen.blit(text, (WINDOW_SIZE[0] / 2 - text.get_width() / 2, 35)) 
+        self.screen.blit(text, (WINDOW_SIZE[0] / 2 - text.get_width() / 2, 35))
 
         self.score.draw(self.screen)
 
@@ -75,14 +75,14 @@ class Level3(Level):
                     self.next_question()
 
     def next_question(self, first=False):
-        self.score.increment_score() 
+        self.score.increment_score()
         if len(self.pool.questions) == 1:
             self.transition_call(Level4(self.screen, self.transition_call, self.score.score)) #Se não houver mais perguntas, muda para a próxima fase
         else:
             if not first:
                 self.pool.questions.pop(0) #Remove a pergunta atual
                 self.pool.next_question() #Pega a próxima pergunta
-            self.text = self.pool.get_question() 
+            self.text = self.pool.get_question()
             self.answers = self.pool.get_answers()
             self.answer_btn = []
             for a in self.answers:

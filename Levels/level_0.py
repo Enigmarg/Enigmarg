@@ -8,7 +8,7 @@ from util import WINDOW_SIZE
 
 # TELA DE MENU
 class Level0(Level):
-    def __init__(self, screen, transition_call, quit_game): 
+    def __init__(self, screen, transition_call, quit_game):
         super().__init__(screen, transition_call)
         self.quit = quit_game
         self.screen = screen
@@ -44,8 +44,6 @@ class Level0(Level):
             self.screen.blit(self.images["background"], (self.pos, 0))
             self.screen.blit(self.logo, ((WINDOW_SIZE[0] / 2 - self.logo.get_width()
                                         // 2), 70)) #Posiciona o logo no centro da tela
-            
-
             self.pos -= 1
 
             self.jogar.draw(self.screen)
@@ -56,8 +54,8 @@ class Level0(Level):
             if self.ranking.check_button():
                 self.transition_call(Level2(self.screen, self.transition_call, self.quit, Level0)) #Se o botão ranking for pressionado, muda para a tela de ranking
 
-            self.sair.draw(self.screen) 
-            if self.sair.check_button(): 
+            self.sair.draw(self.screen)
+            if self.sair.check_button():
                 self.quit() #Se o botão sair for pressionado, fecha o jogo
 
 
@@ -65,7 +63,7 @@ class Level0(Level):
             if self.speaker.check_click():
                 pygame.mixer.pause() #Se o botão de som for pressionado, silencia o jogo
             else:
-                pygame.mixer.unpause() 
+                pygame.mixer.unpause()
 
             if abs(self.pos) > WINDOW_SIZE[0]:
                 self.pos = 0
