@@ -47,6 +47,7 @@ class Level1(Level):
 
     def run(self):
         self.screen.fill("black")
+  
         dt = pygame.time.get_ticks() / 1000
 
         self.screen.blit(self.images["clouds"], (self.cloudx, 0))
@@ -77,7 +78,6 @@ class Level1(Level):
                 self.x -= self.player.acceleration.x / 5
                 self.cloudx -= self.player.acceleration.x / 3
                 self.door.rect.x -= self.player.acceleration.x / 5 * 2.5
-
 
             if abs(self.x) > 2400:
                 self.x = 0

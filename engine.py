@@ -4,7 +4,6 @@ from Levels.level_0 import Level0
 from Levels.level_3 import Level3
 from util import WINDOW_SIZE
 
-
 class Engine():
     def __init__(self):
         # Initializes pygame modules

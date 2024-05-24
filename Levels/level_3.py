@@ -22,7 +22,9 @@ class Level3(Level):
         self.texts = []
         self.answer_btn = []
         self.pos = 0
+
         self.voltar = Button((10, 465), (150, 50), pygame.Color("gray"), "Voltar")
+
         self.text = self.pool.get_question()
         self.answers:list[dict] = self.pool.get_answers()
         self.score = Score((10, 10), (100, 50), pygame.Color("gray"))
@@ -32,6 +34,7 @@ class Level3(Level):
         self.images = {
             "background": pygame.image.load("./resources/background.png")
                                                     .convert_alpha(),
+
             "chalkboard": pygame.transform.scale_by(pygame.image.load("./resources/chalkboard.png")
                                                     .convert_alpha(), 1.5)
         }
