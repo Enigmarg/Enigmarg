@@ -57,8 +57,6 @@ class Level1(Level):
             for tile in tiles:
                 self.screen.blit(tile[2], (tile[0] * 30 + self.x * 2.5, tile[1] * 30))
 
-        pygame.draw.rect(self.screen, "blue", self.door.rect)
-
         keys = pygame.key.get_pressed()
         self.player.acceleration = pygame.Vector2(0, 0)
 
@@ -91,7 +89,6 @@ class Level1(Level):
         if self.check_door():
             self.is_active = False
             self.transition_call(Level3(self.screen, self.transition_call))
-            return
 
         if not self.check_obstacles():
             self.player.change_movement(True)
