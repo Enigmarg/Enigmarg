@@ -22,11 +22,13 @@ class Player:
             self.scale))
         self.sprite = (0,0)
         self.facing = "down"
+        self.is_colliding = False
 
     def walk(self, direction) -> None:
         match direction:
             case "up":
-                self.acceleration.y = -self.speed
+                if not self.is_colliding:
+                    self.acceleration.y = -self.speed
             case "down":
                 self.acceleration.y = self.speed
             case "left":
@@ -68,3 +70,11 @@ class Player:
             self.sprite = self.animations[self.facing][int(pygame.time.get_ticks() / 400) % 2 + 1]
         else:
             self.sprite = self.animations[self.facing][0]
+
+    def get_rect(self):
+        return pygame.rect.Rect(self.position.x + 15, self.position.y + 50,
+                                 self.mask.get_size()[0] - 30, self.mask.get_size()[1] - 50)
+
+    def change_movement(self, collided):
+        self.position.y = self.position.y
+        self.is_colliding = collided

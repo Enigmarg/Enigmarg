@@ -1,16 +1,17 @@
 import pygame
+from Levels.level import Level
+from Levels.level_0 import Level0
 from Levels.level_3 import Level3
 from util import WINDOW_SIZE
-from Levels.level_0 import Level0
-from Levels.level import Level
-
 
 class Engine():
     def __init__(self):
         # Initializes pygame modules
         pygame.init()
 
-        self.screen = pygame.display.set_mode(WINDOW_SIZE)
+        self.screen = pygame.display.set_mode(WINDOW_SIZE,
+                                               pygame.DOUBLEBUF | pygame.HWSURFACE
+                                                 | pygame.RESIZABLE)
         self.clock = pygame.time.Clock()
         self.running = True
         self.transition = 0
@@ -48,7 +49,7 @@ class Engine():
                         if event.key == pygame.K_e:
                             self.call_transition(
                                 Level0(self.screen, self.call_transition, self.quit))
-                        if event.key == pygame.K_q:
+                        if event.key == pygame.K_ESCAPE:
                             self.running = False
 
             if self.active_scene:
