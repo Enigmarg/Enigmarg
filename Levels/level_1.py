@@ -1,8 +1,8 @@
 import pygame
 from pytmx import pytmx
 from pytmx.util_pygame import load_pygame
-from Levels.level import Level
-from Levels.level_3 import Level3
+from levels.level import Level
+from levels.level_3 import Level3
 from classes.player import Player
 
 class Level1(Level):
@@ -72,7 +72,7 @@ class Level1(Level):
             self.player.walk("right")
 
         if self.player.acceleration.x != 0: #Move o background (parallax)
-            if self.player.position.x > self.screen.get_width() / 2:
+            if self.player.position.x > self.screen.get_width() / 2 and abs(self.x * 2.5) < 2300:
                 self.x -= self.player.acceleration.x / 5
                 self.cloudx -= self.player.acceleration.x / 3
                 self.door.rect.x -= self.player.acceleration.x / 5 * 2.5

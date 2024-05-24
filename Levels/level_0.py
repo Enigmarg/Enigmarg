@@ -1,7 +1,7 @@
 import pygame
-from Levels.level import Level
-from Levels.level_1 import Level1
-from Levels.level_2 import Level2
+from levels.level import Level
+from levels.level_1 import Level1
+from levels.level_2 import Level2
 from UI.button import Button
 from UI.image_button import ImageButton
 from util import WINDOW_SIZE

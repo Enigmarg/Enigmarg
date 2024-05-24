@@ -1,8 +1,8 @@
 import json
 import pygame
 from classes.question_pool import QuestionPool
-from Levels.level import Level
-from Levels.level_4 import Level4
+from levels.level import Level
+from levels.level_4 import Level4
 from UI.button import Button
 from UI.score import Score
 from util import WINDOW_SIZE, break_line

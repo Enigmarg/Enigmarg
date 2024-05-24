@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock, patch
 import pygame
-from Levels.level import Level
-from Levels.level_0 import Level0
+from levels.level import Level
+from levels.level_0 import Level0
 from engine import Engine
 
 class TestEngine(unittest.TestCase):

@@ -1,6 +1,6 @@
 import pygame
 from util import WINDOW_SIZE
-from Levels.level import Level
+from levels.level import Level
 from UI.score import Score
 
 # TELA DE RANKING

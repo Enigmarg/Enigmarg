@@ -1,7 +1,7 @@
 import pygame
-from Levels.level import Level
-from Levels.level_0 import Level0
-from Levels.level_3 import Level3
+from levels.level import Level
+from levels.level_0 import Level0
+from levels.level_3 import Level3
 from util import WINDOW_SIZE
 
 class Engine():

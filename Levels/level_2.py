@@ -1,5 +1,5 @@
 import pygame
-from Levels.level import Level
+from levels.level import Level
 from UI.button import Button
 from util import WINDOW_SIZE
 
