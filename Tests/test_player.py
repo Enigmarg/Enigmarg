@@ -1,7 +1,7 @@
 import unittest
+from unittest.mock import patch
 import pygame
-from unittest.mock import Mock, patch
-from Classes import player
+from classes import player
 
 class TestPlayer(unittest.TestCase):
     def setUp(self):
@@ -29,7 +29,7 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(self.player.acceleration.x, self.player.speed)
 
     @patch('pygame.time.get_ticks', return_value=1000)
-    def test_change_sprite(self, mock_get_ticks):
+    def test_change_sprite(self):
         self.player.acceleration = pygame.Vector2(1, 0)
         self.player.change_sprite()
         self.assertEqual(self.player.facing, "right")

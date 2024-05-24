@@ -3,7 +3,7 @@ from pytmx import pytmx
 from pytmx.util_pygame import load_pygame
 from Levels.level import Level
 from Levels.level_3 import Level3
-from Classes.player import Player
+from classes.player import Player
 
 class Level1(Level):
     def __init__(self, screen, transition_call):

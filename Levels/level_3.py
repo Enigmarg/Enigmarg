@@ -1,6 +1,6 @@
 import json
 import pygame
-from Classes.question_pool import QuestionPool
+from classes.question_pool import QuestionPool
 from Levels.level import Level
 from Levels.level_4 import Level4
 from UI.button import Button
