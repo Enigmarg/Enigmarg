@@ -47,7 +47,7 @@ class Level1(Level):
 
     def run(self):
         self.screen.fill("black")
-  
+
         dt = pygame.time.get_ticks() / 1000
 
         self.screen.blit(self.images["clouds"], (self.cloudx, 0))
