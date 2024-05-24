@@ -14,12 +14,12 @@ class Level4(Level):
         self.font1 = pygame.font.Font("./resources/fonts/monogram.ttf", 40)
         self.font2 = pygame.font.Font("./resources/fonts/monogram.ttf", 30)
         self.font3 = pygame.font.Font("./resources/fonts/monogram.ttf", 20)
-        self.texto1: pygame.Surface
-        self.texto2: pygame.Surface
-        self.texto3: pygame.Surface
+        self.texto1: pygame.Surface #Texto 1 = "Parabéns! Você concluiu todas as questões."
+        self.texto2: pygame.Surface #Texto 2 = "Essa foi sua pontuação."
+        self.texto3: pygame.Surface #Texto 3 = "Pressione esc para sair do jogo."
 
         self.logo: pygame.Surface
-        self.pontuacao = Score((345, 400), (100, 50), pygame.Color("gray"))
+        self.pontuacao = Score((345, 400), (100, 50), pygame.Color("gray")) 
         self.score = score
 
 
@@ -32,7 +32,7 @@ class Level4(Level):
 
         self.logo = pygame.transform.scale_by(self.images["logo"], 0.6)
 
-        self.pontuacao.score = self.score
+        self.pontuacao.score = self.score #Pega a pontuação do jogador
         self.is_loaded = all(image is not None for image in self.images.values())
         self.texto1 = self.font1.render("Parabéns! Você concluiu todas as questões.", True, "white")
         self.texto2 = self.font2.render("Essa foi sua pontuação.", True, "white")
