@@ -10,8 +10,7 @@ class Engine():
         pygame.init()
 
         self.screen = pygame.display.set_mode(WINDOW_SIZE,
-                                               pygame.DOUBLEBUF | pygame.HWSURFACE
-                                                 | pygame.RESIZABLE)
+                                               pygame.DOUBLEBUF | pygame.HWSURFACE)
         self.clock = pygame.time.Clock()
         self.running = True
         self.transition = 0

@@ -15,10 +15,13 @@ Instituto Mauá de Tecnologia (IMT) - Turma 3
 | Guilherme Almeida | 24.00931-8 | @GuilhermeAlmeida2 |
 
 ## Padrões:
+
 - Commit:
+
 ```bash
     git commit -m "<tipo>: <mensagem>"
 ```
+
 Onde `<tipo>` deve obedecer a convenção:
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
@@ -27,8 +30,8 @@ Onde `<tipo>` deve obedecer a convenção:
 Ex:. `feat: player movement`
 
 - Formatação:
-    - White Space: 4
-    - Nome de classes: Camel Case
-    - Nome de constantes: Maiúscula
-    - Nome de funções: Snake Case
-    - Formatador: `pylint`
+  - White Space: 4
+  - Nome de classes: Camel Case
+  - Nome de constantes: Maiúscula
+  - Nome de funções: Snake Case
+  - Formatador: `pylint`
