@@ -8,7 +8,7 @@ class Button:
         self.text = text
         self.border_color = pygame.Color("white")
         self.clicked = False
-        self.font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
+        self.font = pygame.font.Font("./resources/fonts/monogram.ttf", 24)
 
 #Definindo a interface dos botões.
     def draw(self, surface):

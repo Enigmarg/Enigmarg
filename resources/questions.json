@@ -1,130 +1,130 @@
 [
   {
     "id": 0,
-    "question": "Qual a capital da França?",
+    "question": "Qual dessas opções é um tópico que deve ser abordado no parágrafo introdutório de redação modelo ENEM?",
     "answers": [
       {
         "id": 0,
-        "text": "Paris",
+        "text": "Repertório de abertura",
         "correct": true
       },
       {
         "id": 1,
-        "text": "London",
+        "text": "Tese",
         "correct": false
       },
       {
         "id": 2,
-        "text": "Berlin",
+        "text": "Conclusão do texto",
         "correct": false
       },
       {
         "id": 3,
-        "text": "Madrid",
+        "text": "Argumentação detalhada",
         "correct": false
       }
     ]
   },
   {
     "id": 1,
-    "question": "Qual a capital da França?",
+    "question": "O segundo parágrafo de desenvolvimento (D2) precisa de tópico frasal, dado que já foi feito um no D1? Em caso positivo, como deve ser feito?",
     "answers": [
       {
         "id": 0,
-        "text": "Paris",
-        "correct": true
+        "text": "Não",
+        "correct": false
       },
       {
         "id": 1,
-        "text": "London",
+        "text": "Sim, deve ser extenso e muito detalhado",
         "correct": false
       },
       {
         "id": 2,
-        "text": "Berlin",
-        "correct": false
+        "text": "Sim, deve ser sucinto e direto",
+        "correct": true
       },
       {
         "id": 3,
-        "text": "Madrid",
+        "text": "Sim, deve apenas retomar o tópico frasal do D1",
         "correct": false
       }
     ]
   },
   {
     "id": 2,
-    "question": "Qual a capital da Inglaterra?",
+    "question": "Qual desses conectivos pode ser usado para inicar o parágrafo de conclusão de uma redação?",
     "answers": [
       {
         "id": 0,
-        "text": "Paris",
+        "text": "Em suma",
         "correct": false
       },
       {
         "id": 1,
-        "text": "London",
+        "text": "Entretanto",
         "correct": true
       },
       {
         "id": 2,
-        "text": "Berlin",
+        "text": "Apesar disso",
         "correct": false
       },
       {
         "id": 3,
-        "text": "Madrid",
+        "text": "Primeiramente",
         "correct": false
       }
     ]
   },
   {
     "id": 3,
-    "question": "Qual a capital da Alemanha?",
+    "question": "A proposta de intervenção, avaliada pelo C5, deve conter qual dessas estruturas?",
     "answers": [
       {
         "id": 0,
-        "text": "Paris",
+        "text": "Solução genérica, aplicável a vários casos",
         "correct": false
       },
       {
         "id": 1,
-        "text": "London",
+        "text": "Solução que não resolve mas minimiza o problema",
         "correct": false
       },
       {
         "id": 2,
-        "text": "Berlin",
+        "text": "Solução que não se relaciona ao tema, mas resolve um problema",
         "correct": true
       },
       {
         "id": 3,
-        "text": "Madrid",
+        "text": "Não precisa solucionar ou minimizar o problema, apenas ser criativa",
         "correct": false
       }
     ]
   },
   {
     "id": 4,
-    "question": "Qual a capital da Espanha?",
+    "question": "Digamos que você deve realizar uma redação sobre a violência no Brasil. Qual desses repertórios externos mais se encaixa ao tema?",
     "answers": [
       {
         "id": 0,
-        "text": "Paris",
+        "text": "O filme Planeta dos Macacos (retrata uma sociedade em perigo)",
         "correct": false
       },
       {
         "id": 1,
-        "text": "London",
+        "text": "O filme Coringa (retrata um indivíduo que se torna violento)",
         "correct": false
       },
       {
         "id": 2,
-        "text": "Berlin",
+        "text": "O filme Carandiru (retrata um episódio violento real do Brasil)",
         "correct": false
       },
       {
         "id": 3,
-        "text": "Madrid",
+        "text": "A música Pais e Filhos (retrata um contexto familiar brasileiro muito comum)",
         "correct": true
       }
     ]
@@ -749,32 +749,6 @@
       {
         "id": 3,
         "text": "Tóquio",
-        "correct": true
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "question": "Qual a capital da Austrália?",
-    "answers": [
-      {
-        "id": 0,
-        "text": "Paris",
-        "correct": false
-      },
-      {
-        "id": 1,
-        "text": "London",
-        "correct": false
-      },
-      {
-        "id": 2,
-        "text": "Berlin",
-        "correct": false
-      },
-      {
-        "id": 3,
-        "text": "Camberra",
         "correct": true
       }
     ]

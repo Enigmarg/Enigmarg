@@ -86,9 +86,9 @@ class Level3(Level):
             self.answers = self.pool.get_answers()
             self.answer_btn = []
             for a in self.answers:
-                self.answer_btn.append(Button((WINDOW_SIZE[0] / 2 - 150,
+                self.answer_btn.append(Button((WINDOW_SIZE[0] / 2 - 350,
                                                 WINDOW_SIZE[1] / 2 + 120 *
                                                   self.answers.index(a) / 2 + 50)
-                                              , (300, 40), pygame.Color("gray"), a["text"])) #Cria os botões de resposta
+                                              , (700, 40), pygame.Color("gray"), a["text"])) #Cria os botões de resposta
             self.texts = break_line(self.text,
                                      pygame.Vector2(WINDOW_SIZE[0] / 2 - 150 * 1.5 + 30, 40)) #Quebra a pergunta em várias linhas

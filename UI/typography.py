@@ -6,7 +6,7 @@ class Typography:
         self.pos = pos
         self.text = text
         self.color = color
-        self.font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
+        self.font = pygame.font.Font("./resources/fonts/monogram.ttf", 24)
 
     def draw(self, surface):
         text_surface = self.font.render(self.text, True, self.color)
