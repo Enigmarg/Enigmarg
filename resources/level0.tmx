@@ -3,7 +3,7 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="teste/structures.tsx"/>
+ <tileset firstgid="1" source="structures/structures.tsx"/>
  <imagelayer id="5" name="clouds" repeatx="1">
   <image source="clouds.png" width="800" height="600"/>
  </imagelayer>

@@ -11,6 +11,9 @@ class Engine():
 
         self.screen = pygame.display.set_mode(WINDOW_SIZE,
                                                pygame.DOUBLEBUF | pygame.HWSURFACE)
+        pygame.display.set_caption("Enigmarg")
+        icon = pygame.image.load("./resources/logo.png")
+        pygame.display.set_icon(icon)
         self.clock = pygame.time.Clock()
         self.running = True
         self.transition = 0
@@ -41,11 +44,6 @@ class Engine():
                     case pygame.QUIT:
                         self.running = False
                     case pygame.KEYDOWN:
-                        if event.key == pygame.K_d:
-                            self.call_transition(Level3(self.screen, self.call_transition))
-                        if event.key == pygame.K_e:
-                            self.call_transition(
-                                Level0(self.screen, self.call_transition, self.quit))
                         if event.key == pygame.K_ESCAPE:
                             self.running = False
 
