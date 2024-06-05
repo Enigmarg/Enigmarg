@@ -13,4 +13,4 @@ disable=
     C0412,
     C0301,
 ignore=
-    interfaces
+    ./interfaces/*,
