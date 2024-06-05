@@ -41,11 +41,6 @@ class Engine():
                     case pygame.QUIT:
                         self.running = False
                     case pygame.KEYDOWN:
-                        if event.key == pygame.K_d:
-                            self.call_transition(Level3(self.screen, self.call_transition))
-                        if event.key == pygame.K_e:
-                            self.call_transition(
-                                Level0(self.screen, self.call_transition, self.quit))
                         if event.key == pygame.K_ESCAPE:
                             self.running = False
 
