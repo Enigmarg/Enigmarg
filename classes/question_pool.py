@@ -1,5 +1,6 @@
 class QuestionPool:
     def __init__(self, questions: list[dict]):
+        print(questions)
         self.questions = questions
         self.current_question = 0
 
@@ -24,5 +25,5 @@ class QuestionPool:
     def is_correct_answer(self, guess:str) -> bool:
         for a in self.questions[self.current_question]["answers"]:
             if a["text"] == guess:
-                return a["correct"]
+                return True if a["correct"] == 1 else False
         return False

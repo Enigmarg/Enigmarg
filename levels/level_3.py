@@ -1,36 +1,40 @@
 import json
+import random
 import pygame
 from classes.question_pool import QuestionPool
 from levels.level import Level
 from levels.level_4 import Level4
 from UI.button import Button
 from UI.score import Score
-from util import WINDOW_SIZE, break_line
+from util import WINDOW_SIZE, break_line, DATABASE, USER
 
 # TELA DE JOGO
 
 class Level3(Level):
     def __init__(self, screen, transition_call):
         super().__init__(screen, transition_call)
-        # Fetch data from database
-        with open("./resources/questions.json", "r", -1, "UTF-8") as file:
-            data = json.load(file)
-            self.pool = QuestionPool(data) #Cria um pool de perguntas
 
         self.screen = screen
         self.images = {}
         self.texts = []
         self.answer_btn = []
         self.pos = 0
+        self.ended = False
 
         self.voltar = Button((10, 465), (150, 50), pygame.Color("gray"), "Voltar")
 
+    def load(self):
+        questions = DATABASE.get_all_questions_json()
+        perguntas = json.loads(questions)
+        random.shuffle(perguntas)
+        selected_questions = perguntas[:10]
+        #Cria um pool de perguntas
+        self.pool = QuestionPool(selected_questions)
         self.text = self.pool.get_question() #Pega a primeira pergunta
         self.answers:list[dict] = self.pool.get_answers() #Pega as respostas para compará-las com a pergunta
         self.score = Score((10, 10), (100, 50), pygame.Color("gray"))
         self.len_questions = len(self.pool.questions) #Pega o número de perguntas
 
-    def load(self):
         self.images = {
             "background": pygame.image.load("./resources/background.png")
                                                     .convert_alpha(),
@@ -39,7 +43,7 @@ class Level3(Level):
                                                     .convert_alpha(), 1.5)
         }
 
-        self.next_question(True) #Pega a próxima pergunta
+        self.next_question(first=True) #Pega a próxima pergunta
 
         self.is_loaded = all(image is not None for image in self.images.values()) #Verifica se todas as imagens foram carregadas
 
@@ -70,14 +74,18 @@ class Level3(Level):
             answer_btn.draw(self.screen)
             if answer_btn.check_button():
                 if self.pool.is_correct_answer(answer_btn.text): #Verifica se a resposta está correta
-                    self.next_question()
+                    self.next_question(correct=True)
                 else:
                     self.next_question()
 
-    def next_question(self, first=False):
-        self.score.increment_score()
+    def next_question(self, first=False, correct=False):
+        if not first:
+            if not self.ended:
+                if correct:
+                    self.score.increment_score()
         if len(self.pool.questions) == 1:
             self.transition_call(Level4(self.screen, self.transition_call, self.score.score)) #Se não houver mais perguntas, muda para a próxima fase
+            self.ended = True
         else:
             if not first:
                 self.pool.questions.pop(0) #Remove a pergunta atual

@@ -1,10 +1,12 @@
 import pygame
 
 from UI.typography import Typography
+from interfaces.database import Database
 
 WINDOW_SIZE = (800, 600)
 TILE_SIZE = 30
 PLAYER_VELOCITY = 200
+DATABASE = Database()
 
 class Spritesheet:
     def __init__(self, imagepath, size_x, size_y):
@@ -55,3 +57,15 @@ def break_line(text:str, start_pos: pygame.Vector2, max_size=300) -> list[Typogr
         total_w += t.get_width()
 
     return texts
+
+class User:
+    def __init__(self, id):
+        self.player_id = id
+
+    def get_id(self) -> int:
+        return self.player_id
+
+    def set_id(self, id):
+        self.player_id = id
+
+USER = User(None)

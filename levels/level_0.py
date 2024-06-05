@@ -1,10 +1,11 @@
 import pygame
+from interfaces.ranking import Ranking
 from levels.level import Level
 from levels.level_1 import Level1
 from levels.level_2 import Level2
 from UI.button import Button
 from UI.image_button import ImageButton
-from util import WINDOW_SIZE
+from util import DATABASE, WINDOW_SIZE
 
 # TELA DE MENU
 class Level0(Level):
@@ -52,7 +53,8 @@ class Level0(Level):
 
             self.ranking.draw(self.screen)
             if self.ranking.check_button():
-                self.transition_call(Level2(self.screen, self.transition_call, self.quit, Level0)) #Se o botão ranking for pressionado, muda para a tela de ranking
+                Ranking(DATABASE).create_ranking_screen()
+                # self.transition_call(Level2(self.screen, self.transition_call, self.quit, Level0)) #Se o botão ranking for pressionado, muda para a tela de ranking
 
             self.sair.draw(self.screen)
             if self.sair.check_button():

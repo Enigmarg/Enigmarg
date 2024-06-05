@@ -1,5 +1,5 @@
 import pygame
-from util import WINDOW_SIZE
+from util import DATABASE, USER, WINDOW_SIZE
 from levels.level import Level
 from UI.score import Score
 
@@ -24,6 +24,7 @@ class Level4(Level):
 
 
     def load(self):
+        DATABASE.add_score(int(USER.get_id()), int(self.score))
         self.is_loaded = True
         self.images = {
             "background": pygame.image.load("./resources/background.png").convert(),

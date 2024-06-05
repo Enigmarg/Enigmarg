@@ -12,3 +12,5 @@ disable=
     R0801,
     C0412,
     C0301,
+ignore=
+    interfaces
