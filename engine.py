@@ -21,11 +21,9 @@ class Engine():
 
     def run(self):
         # # font = pygame.font.Font("./resources/fonts/monogram.ttf", 32)
-        # mixer = pygame.mixer
-        # #! MUDAR !!!!
-        # menu = mixer.Sound("./resources/sounds/main_menu.wav")
-        # menu.set_volume(0.15)
-        # menu.play(-1)
+        menu = pygame.mixer.Sound("./resources/sounds/main_menu.wav")
+        menu.set_volume(0.15)
+        menu.play(-1)
 
         while self.running:
             if not self.loaded:

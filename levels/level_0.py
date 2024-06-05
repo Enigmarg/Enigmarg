@@ -62,7 +62,8 @@ class Level0(Level):
 
 
             self.speaker.draw(self.screen)
-            if self.speaker.check_click():
+            self.speaker.check_click()
+            if self.speaker.state:
                 pygame.mixer.pause() #Se o botão de som for pressionado, silencia o jogo
             else:
                 pygame.mixer.unpause()
