@@ -1,18 +1,17 @@
 import pygame
 
-
 class Level:
     def __init__(self, screen, transition_call):
         """
-        Initializes a Level object.
+        Inicializa um objeto Level.
 
         Args:
-            screen (pygame.Surface): The surface to render the level on.
+            screen (pygame.Surface): A superfície para renderizar o nível.
 
         Attributes:
-            screen (pygame.Surface): The surface to render the level on.
-            is_active (bool): Indicates whether the level is currently active.
-            is_loaded (bool): Indicates whether the level has been loaded.
+            screen (pygame.Surface): A superfície para renderizar o nível.
+            is_active (bool): Indica se o nível está ativo no momento.
+            is_loaded (bool): Indica se o nível foi carregado.
         """
         self.is_active: bool = False
         self.is_loaded: bool = False
@@ -21,19 +20,19 @@ class Level:
 
     def load(self):
         """
-        Loads the level data
+        Carrega os dados do nível
         """
 
     def run(self):
         """
-        This method is responsible for executing the logic of the level.
+        Este método é responsável por executar a lógica do nível.
         """
 
     def get_status(self) -> bool:
         """
-        Returns the status of the object.
+        Retorna o status do objeto.
 
         Returns:
-            bool: The status of the object.
+            bool: O status do objeto.
         """
         return self.is_active
