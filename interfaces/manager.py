@@ -26,6 +26,9 @@ class Manager():
 
         self.screen.geometry("%dx%d+%d+%d" % (self.width, self.height, x, y))
 
+        self.view_icon = tk.PhotoImage(file="resources/view.png")
+        self.hide_icon = tk.PhotoImage(file="resources/hide.png")
+
     def add_users_to_treeview(self):
         users = self.database.get_all_users()
         self.user_tree.delete(*self.user_tree.get_children())
@@ -136,6 +139,14 @@ class Manager():
         self.add_questions_to_treeview()
         self.clear_question()
 
+    def toggle_password(self):
+        if self.password_entry.cget("show") == "":
+            self.password_entry.configure(show="*")
+            self.toggle_btn.configure(image=self.hide_icon)
+        else:
+            self.password_entry.configure(show="")
+            self.toggle_btn.configure(image=self.view_icon)
+
     def create_manager_screen(self):
 
         # TabView
@@ -154,6 +165,9 @@ class Manager():
         password_label.place(x=45, y=120)
         self.password_entry = customtkinter.CTkEntry(tabView.tab("Usuários"), width=300, height=40, show="*", fg_color="gray25", border_width=0)
         self.password_entry.place(x=190, y=170, anchor="center")
+
+        self.toggle_btn = customtkinter.CTkButton(self.password_entry, text="", width=0, height=0, image=self.hide_icon, fg_color="transparent", hover=False, command=self.toggle_password)
+        self.toggle_btn.place(relx=0.93, rely=0.5, anchor="center")
 
         role_label = customtkinter.CTkLabel(tabView.tab("Usuários"), text="Cargo:")
         role_label.place(x=45, y=210)
@@ -270,10 +284,10 @@ class Manager():
         if password == "":
             return password
         else:
-           return sha256(password.encode("utf-8")).hexdigest()
+           return sha256(password.encode("utf-8")).hexdigest() 
     
     def get_role(self):
-        role = self.role_option.get()
+        role = self.role_option.get()   
         return role
     
     def get_question(self):
