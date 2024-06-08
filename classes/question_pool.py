@@ -1,3 +1,6 @@
+import random
+
+
 class QuestionPool:
     def __init__(self, questions: list[dict]):
         print(questions)
@@ -20,7 +23,10 @@ class QuestionPool:
         if len(self.questions) == 0:
             return []
 
-        return self.questions[self.current_question]["answers"]
+        shuffled = self.questions[self.current_question]["answers"]
+        random.shuffle(shuffled)
+
+        return shuffled
 
     def is_correct_answer(self, guess:str) -> bool:
         for a in self.questions[self.current_question]["answers"]:

@@ -2,7 +2,6 @@ import pygame
 from interfaces.ranking import Ranking
 from levels.level import Level
 from levels.level_1 import Level1
-from levels.level_2 import Level2
 from UI.button import Button
 from UI.image_button import ImageButton
 from util import DATABASE, WINDOW_SIZE
